@@ -46,7 +46,7 @@ class easy_ipa::install::client {
     $client_install_cmd_opts_hostname = ''
   }
 
-  if $::ipa_force_join {
+  if $facts['ipa_force_join'] {
     $client_install_cmd_opts_force_join= '--force-join'
   } else {
     $client_install_cmd_opts_force_join = ''
@@ -81,13 +81,14 @@ class easy_ipa::install::client {
       logoutput => 'on_failure',
       before    => Service['sssd'],
       provider  => 'shell',
+      require   => Package['ipa-client'],
     }
   } else {
-    include ::easy_ipa::install::client::manual
+    contain easy_ipa::install::client::manual
   }
 
   if $facts['os']['family'] == 'Debian' and $::easy_ipa::mkhomedir {
-    include ::easy_ipa::install::client::debian
+    contain easy_ipa::install::client::debian
   }
 
   if $easy_ipa::install_sssd {
