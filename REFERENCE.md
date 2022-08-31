@@ -9,7 +9,6 @@
 #### Public Classes
 
 * [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
-* [`easy_ipa::config::admin_user`](#easy_ipa--config--admin_user): Manage admin user
 * [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
 * [`easy_ipa::install`](#easy_ipa--install): Manage easy_ipa install
 * [`easy_ipa::install::autofs`](#easy_ipa--install--autofs): Manage autofs
@@ -234,7 +233,7 @@ Data type: `Optional[String[1]]`
 
 (string) The password for the domain_join_principal.
 
-Default value: `undef`
+Default value: `$directory_services_password`
 
 ##### <a name="-easy_ipa--enable_dns_updates"></a>`enable_dns_updates`
 
@@ -460,10 +459,6 @@ Data type: `Boolean`
 
 Default value: `false`
 
-### <a name="easy_ipa--config--admin_user"></a>`easy_ipa::config::admin_user`
-
-Manage admin user
-
 ### <a name="easy_ipa--config--webui"></a>`easy_ipa::config::webui`
 
 Configures port and redirect overrides for the IPA server web UI.
@@ -484,8 +479,6 @@ Manage ipa client
 
 This code is needed as the --mkhomedir parameter passed to ipa-client-install does
 not configure PAM even though it does install the required packages.
-
-Currently Ubuntu 14.04/16.04 and Debian 8/9 are supported.
 
 ### <a name="easy_ipa--install--client--manual"></a>`easy_ipa::install::client::manual`
 

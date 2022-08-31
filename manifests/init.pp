@@ -208,13 +208,6 @@ class easy_ipa (
       default => $realm,
     }
 
-    $master_principals = suffix(
-      prefix([$ipa_server_fqdn],
-        'host/'
-      ),
-      "@${final_realm}"
-    )
-
     if $ipa_role == 'client' {
       $final_configure_dns_server = false
     } else {
