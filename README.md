@@ -38,7 +38,6 @@ class {'easy_ipa':
     ip_address                  => '192.168.56.35',
     enable_ip_address           => true,
     enable_hostname             => true,
-    install_epel                => true,
     webui_enable_proxy          => true,
 }
 ```
@@ -54,7 +53,6 @@ class {'::easy_ipa':
     ip_address           => '192.168.56.36',
     enable_ip_address    => true,
     enable_hostname      => true,
-    install_epel         => true,
     ipa_master_fqdn      => 'ipa-server-1.vagrant.example.lan',
 }
 ```
@@ -109,7 +107,6 @@ class {'::easy_ipa':
 ipa_role             => 'client',
 domain               => 'vagrant.example.lan',
 domain_join_password => 'vagrant123',
-install_epel         => true,
 ipa_master_fqdn      => 'ipa-server-1.vagrant.example.lan',
 }
 ```

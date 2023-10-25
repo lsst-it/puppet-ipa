@@ -7,6 +7,7 @@ configure_beaker(modules: :metadata) do |host|
   # https://pagure.io/freeipa/c/87496d647706462fa8a10bbea5637104153146b2
   on(host, 'sysctl -w fs.protected_regular=0')
   install_puppet_module_via_pmt_on(host, 'puppet/cron')
+  install_puppet_module_via_pmt_on(host, 'puppet/epel')
 
   if fact_on(host, 'os.family') == 'RedHat' && fact_on(host, 'os.release.major') == '7'
     # https://cstan.io/?p=12175&lang=en
