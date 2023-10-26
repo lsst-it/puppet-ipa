@@ -2,6 +2,13 @@
 # @summary Manage ipa client
 #
 class easy_ipa::install::client {
+  unless $easy_ipa::final_domain_join_password {
+    fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
+  }
+  unless $easy_ipa::ipa_master_fqdn {
+    fail("When creating a ${easy_ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
+  }
+
   package { 'ipa-client':
     ensure => $easy_ipa::params::ipa_client_package_ensure,
     name   => $easy_ipa::params::ipa_client_package_name,

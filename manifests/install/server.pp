@@ -2,6 +2,15 @@
 # @summary Manage IPA server install
 #
 class easy_ipa::install::server {
+  if $easy_ipa::ipa_role != 'master' { # if replica or client
+    unless $easy_ipa::final_domain_join_password {
+      fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
+    }
+    unless $easy_ipa::ipa_master_fqdn {
+      fail("When creating a ${easy_ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
+    }
+  }
+
   if fact('os.family') == 'RedHat' {
     require easy_ipa::install::server::redhat
   }

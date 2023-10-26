@@ -156,6 +156,10 @@ class easy_ipa (
   # Include per-OS parameters and fail on unsupported OS
   include easy_ipa::params
 
+  if $easy_ipa::idmax and $easy_ipa::idmax < $easy_ipa::idstart {
+    fail('Parameter "idmax" must be an integer greater than parameter "idstart".')
+  }
+
   $final_realm = $realm ? {
     undef   => upcase($domain),
     default => $realm,
@@ -202,6 +206,5 @@ class easy_ipa (
     }
   }
 
-  require easy_ipa::validate_params
   contain easy_ipa::install
 }
