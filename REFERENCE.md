@@ -23,7 +23,6 @@
 #### Private Classes
 
 * `easy_ipa::install::server::redhat`
-* `easy_ipa::validate_params`: Validates input configs from init.pp.
 
 ### Defined types
 
