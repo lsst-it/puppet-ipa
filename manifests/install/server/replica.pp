@@ -31,7 +31,6 @@ class easy_ipa::install::server::replica {
     creates   => '/etc/ipa/default.conf',
     logoutput => false,  # prevent passphrases from appearing in puppet log
     notify    => Easy_ipa::Helpers::Flushcache["server_${easy_ipa::ipa_server_fqdn}"],
-    before    => Service['sssd'],
   }
   -> cron { 'k5start_root':
     command => '/usr/bin/k5start -f /etc/krb5.keytab -U -o root -k /tmp/krb5cc_0 > /dev/null 2>&1',

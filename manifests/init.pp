@@ -80,9 +80,6 @@
 # @param install_ipa_server
 #      (boolean) If true, then the IPA server packages are installed if the parameter 'ipa_role' is not set to 'client'.
 #
-# @param install_sssd
-#      (boolean) If true, then the sssd packages are installed.
-#
 # @param ip_address
 #      (string) IP address to pass to the IPA installer.
 #
@@ -145,7 +142,6 @@ class easy_ipa (
   Variant[Integer,Undef] $idmax                    = undef,
   Boolean $install_ipa_client                      = true,
   Boolean $install_ipa_server                      = true,
-  Boolean $install_sssd                            = true,
   Optional[Stdlib::IP::Address] $ip_address        = undef,
   String $ipa_server_fqdn                          = $facts['networking']['fqdn'],
   Optional[Stdlib::Fqdn] $ipa_master_fqdn          = undef,

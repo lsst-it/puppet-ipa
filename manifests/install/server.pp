@@ -125,13 +125,5 @@ class easy_ipa::install::server {
     require => Exec["server_install_${easy_ipa::ipa_server_fqdn}"],
   }
 
-  if $easy_ipa::install_sssd {
-    service { 'sssd':
-      ensure  => 'running',
-      enable  => true,
-      require => Package[$easy_ipa::params::sssd_package_name],
-    }
-  }
-
   easy_ipa::helpers::flushcache { "server_${easy_ipa::ipa_server_fqdn}": }
 }

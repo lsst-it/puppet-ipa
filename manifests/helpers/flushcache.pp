@@ -26,7 +26,6 @@ fi"
   exec { "ipa_flushcache_${title}":
     command     => "/bin/bash -c ${ipa_fluch_cache_cmd}",
     returns     => ['0','1','2'],
-    notify      => Service['sssd'],
     refreshonly => true,
   }
 }
