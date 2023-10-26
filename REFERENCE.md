@@ -270,7 +270,7 @@ Data type: `String`
 
 (string) Actual fqdn of the IPA server or client.
 
-Default value: `$facts['networking']['fqdn']`
+Default value: `fact('networking.fqdn')`
 
 ##### <a name="-easy_ipa--ipa_master_fqdn"></a>`ipa_master_fqdn`
 
@@ -477,7 +477,7 @@ Data type: `String`
 
 Email to send cron notifications to. Defaults to $::servermonitor.
 
-Default value: `$facts['servermonitor']`
+Default value: `fact('servermonitor')`
 
 ### <a name="easy_ipa--config--named"></a>`easy_ipa::config::named`
 

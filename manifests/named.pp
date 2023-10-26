@@ -7,7 +7,7 @@
 class easy_ipa::named {
   include easy_ipa::params
 
-  unless $facts['os']['family'] == 'RedHat' {
+  unless fact('os.family') == 'RedHat' {
     fail('ERROR: class ::easy_ipa::named supports only RedHat/CentOS')
   }
 

@@ -135,7 +135,7 @@ class easy_ipa (
   Integer[10000] $idstart                          = (fqdn_rand('10737') + 10000),
   Variant[Integer,Undef] $idmax                    = undef,
   Optional[Stdlib::IP::Address] $ip_address        = undef,
-  String $ipa_server_fqdn                          = $facts['networking']['fqdn'],
+  String $ipa_server_fqdn                          = fact('networking.fqdn'),
   Optional[Stdlib::Fqdn] $ipa_master_fqdn          = undef,
   Boolean $mkhomedir                               = true,
   Boolean $no_ui_redirect                          = false,

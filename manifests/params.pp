@@ -7,7 +7,7 @@
 # by failing early rather than later.
 #
 class easy_ipa::params {
-  case $facts['os']['family'] {
+  case fact('os.family') {
     'RedHat': {
       $ipa_client_package_name = 'ipa-client'
       $ipa_client_package_ensure = 'present'

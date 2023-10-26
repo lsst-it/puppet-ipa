@@ -43,12 +43,12 @@ class easy_ipa::install::client {
   }
 
   if $easy_ipa::enable_hostname {
-    $client_install_cmd_opts_hostname = "--hostname=${facts['networking']['fqdn']}"
+    $client_install_cmd_opts_hostname = "--hostname=${fact('networking.fqdn')}"
   } else {
     $client_install_cmd_opts_hostname = ''
   }
 
-  if $facts['ipa_force_join'] {
+  if fact('ipa_force_join') {
     $client_install_cmd_opts_force_join= '--force-join'
   } else {
     $client_install_cmd_opts_force_join = ''
@@ -72,7 +72,7 @@ class easy_ipa::install::client {
   --unattended"
 
   if $easy_ipa::params::ipa_client_package_ensure == 'present' {
-    exec { "client_install_${facts['networking']['fqdn']}":
+    exec { "client_install_${fact('networking.fqdn')}":
       command   => $client_install_cmd,
       timeout   => 0,
       unless    => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
@@ -83,7 +83,7 @@ class easy_ipa::install::client {
     }
   }
 
-  if $facts['os']['family'] == 'Debian' and $easy_ipa::mkhomedir {
+  if fact('os.family') == 'Debian' and $easy_ipa::mkhomedir {
     contain easy_ipa::install::client::debian
   }
 }
