@@ -74,12 +74,6 @@
 # @param idmax
 #      (integer) From the IPA man pages: "The max value for the IDs range (default: idstart+199999)".
 #
-# @param install_ipa_client
-#      (boolean) If true, then the IPA client packages are installed if the parameter 'ipa_role' is set to 'client'.
-#
-# @param install_ipa_server
-#      (boolean) If true, then the IPA server packages are installed if the parameter 'ipa_role' is not set to 'client'.
-#
 # @param ip_address
 #      (string) IP address to pass to the IPA installer.
 #
@@ -140,8 +134,6 @@ class easy_ipa (
   Variant[Pattern,Undef] $gssapi_no_negotiate      = undef,
   Integer[10000] $idstart                          = (fqdn_rand('10737') + 10000),
   Variant[Integer,Undef] $idmax                    = undef,
-  Boolean $install_ipa_client                      = true,
-  Boolean $install_ipa_server                      = true,
   Optional[Stdlib::IP::Address] $ip_address        = undef,
   String $ipa_server_fqdn                          = $facts['networking']['fqdn'],
   Optional[Stdlib::Fqdn] $ipa_master_fqdn          = undef,
@@ -201,5 +193,9 @@ class easy_ipa (
     }
   }
 
-  contain easy_ipa::install
+  if $easy_ipa::ipa_role == 'master' or $easy_ipa::ipa_role == 'replica' {
+    contain 'easy_ipa::install::server'
+  } elsif $easy_ipa::ipa_role == 'client' {
+    contain 'easy_ipa::install::client'
+  }
 }

@@ -10,7 +10,6 @@
 
 * [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
 * [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
-* [`easy_ipa::install`](#easy_ipa--install): Manage easy_ipa install
 * [`easy_ipa::install::client`](#easy_ipa--install--client): Manage ipa client
 * [`easy_ipa::install::client::debian`](#easy_ipa--install--client--debian): Ensure that home directories get created on Debian and Ubuntu clients.
 * [`easy_ipa::install::server`](#easy_ipa--install--server): Manage IPA server install
@@ -70,8 +69,6 @@ The following parameters are available in the `easy_ipa` class:
 * [`idstart`](#-easy_ipa--idstart)
 * [`gssapi_no_negotiate`](#-easy_ipa--gssapi_no_negotiate)
 * [`idmax`](#-easy_ipa--idmax)
-* [`install_ipa_client`](#-easy_ipa--install_ipa_client)
-* [`install_ipa_server`](#-easy_ipa--install_ipa_server)
 * [`ip_address`](#-easy_ipa--ip_address)
 * [`ipa_server_fqdn`](#-easy_ipa--ipa_server_fqdn)
 * [`ipa_master_fqdn`](#-easy_ipa--ipa_master_fqdn)
@@ -259,22 +256,6 @@ Data type: `Variant[Integer,Undef]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--install_ipa_client"></a>`install_ipa_client`
-
-Data type: `Boolean`
-
-(boolean) If true, then the IPA client packages are installed if the parameter 'ipa_role' is set to 'client'.
-
-Default value: `true`
-
-##### <a name="-easy_ipa--install_ipa_server"></a>`install_ipa_server`
-
-Data type: `Boolean`
-
-(boolean) If true, then the IPA server packages are installed if the parameter 'ipa_role' is not set to 'client'.
-
-Default value: `true`
-
 ##### <a name="-easy_ipa--ip_address"></a>`ip_address`
 
 Data type: `Optional[Stdlib::IP::Address]`
@@ -360,10 +341,6 @@ Default value: `false`
 ### <a name="easy_ipa--config--webui"></a>`easy_ipa::config::webui`
 
 Configures port and redirect overrides for the IPA server web UI.
-
-### <a name="easy_ipa--install"></a>`easy_ipa::install`
-
-Manage easy_ipa install
 
 ### <a name="easy_ipa--install--client"></a>`easy_ipa::install::client`
 
