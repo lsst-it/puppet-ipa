@@ -5,7 +5,7 @@ Yumrepo <||>
 -> class { 'ipa':
   ipa_role             => 'replica',
   domain               => 'example.com',
-  ipa_master_fqdn      => 'master.example.com',
+  ipa_master_fqdn      => 'master-puppet8.example.com',
   admin_password       => 'rspecrspec123',
   configure_dns_server => false,
   configure_ntp        => false,

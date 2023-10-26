@@ -20,3 +20,7 @@ spec/spec_helper_acceptance.rb:
   delete: true
 .github/workflows/markdownlint.yaml:
   delete: true
+
+.github/workflows/ci.yml:
+  with:
+    beaker_hosts: master,replica,client

@@ -6,6 +6,6 @@ Yumrepo <||>
   domain                => 'example.com',
   domain_join_principal => 'admin',
   domain_join_password  => 'rspecrspec123',
-  ipa_master_fqdn       => 'master.example.com',
+  ipa_master_fqdn       => 'master-puppet8.example.com',
   configure_ntp         => false,  # chronyd usually fails under gha
 }
