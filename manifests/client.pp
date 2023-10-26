@@ -1,7 +1,7 @@
 #
 # @summary Manage ipa client
 #
-class easy_ipa::install::client {
+class easy_ipa::client {
   unless $easy_ipa::domain_join_password {
     fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
   }
@@ -84,6 +84,6 @@ class easy_ipa::install::client {
   }
 
   if fact('os.family') == 'Debian' and $easy_ipa::mkhomedir {
-    contain easy_ipa::install::client::debian
+    contain easy_ipa::client::debian
   }
 }

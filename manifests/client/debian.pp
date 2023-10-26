@@ -4,7 +4,7 @@
 # This code is needed as the --mkhomedir parameter passed to ipa-client-install does
 # not configure PAM even though it does install the required packages.
 #
-class easy_ipa::install::client::debian {
+class easy_ipa::client::debian {
   # Ensure that required packages are present even if they do not get pulled
   # in as freeipa-client package dependencies
   stdlib::ensure_packages(['oddjob','oddjob-mkhomedir'], { 'ensure' => 'present' })

@@ -9,9 +9,9 @@
 #### Public Classes
 
 * [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
+* [`easy_ipa::client`](#easy_ipa--client): Manage ipa client
+* [`easy_ipa::client::debian`](#easy_ipa--client--debian): Ensure that home directories get created on Debian and Ubuntu clients.
 * [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
-* [`easy_ipa::install::client`](#easy_ipa--install--client): Manage ipa client
-* [`easy_ipa::install::client::debian`](#easy_ipa--install--client--debian): Ensure that home directories get created on Debian and Ubuntu clients.
 * [`easy_ipa::install::server`](#easy_ipa--install--server): Manage IPA server install
 * [`easy_ipa::install::server::master`](#easy_ipa--install--server--master): Manage primary server
 * [`easy_ipa::install::server::replica`](#easy_ipa--install--server--replica): Manage replica install
@@ -338,18 +338,18 @@ Data type: `Boolean`
 
 Default value: `false`
 
-### <a name="easy_ipa--config--webui"></a>`easy_ipa::config::webui`
-
-Configures port and redirect overrides for the IPA server web UI.
-
-### <a name="easy_ipa--install--client"></a>`easy_ipa::install::client`
+### <a name="easy_ipa--client"></a>`easy_ipa::client`
 
 Manage ipa client
 
-### <a name="easy_ipa--install--client--debian"></a>`easy_ipa::install::client::debian`
+### <a name="easy_ipa--client--debian"></a>`easy_ipa::client::debian`
 
 This code is needed as the --mkhomedir parameter passed to ipa-client-install does
 not configure PAM even though it does install the required packages.
+
+### <a name="easy_ipa--config--webui"></a>`easy_ipa::config::webui`
+
+Configures port and redirect overrides for the IPA server web UI.
 
 ### <a name="easy_ipa--install--server"></a>`easy_ipa::install::server`
 
