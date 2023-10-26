@@ -4,7 +4,10 @@
 # This code is needed as the --mkhomedir parameter passed to ipa-client-install does
 # not configure PAM even though it does install the required packages.
 #
+# @api private
 class easy_ipa::client::debian {
+  assert_private()
+
   case fact('os.distro.codename') {
     /^(xenial|stretch|bionic|focal|buster|bullseye|jammy)$/: {
       # Ensure that required packages are present even if they do not get pulled
