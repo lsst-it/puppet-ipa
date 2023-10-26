@@ -1,24 +1,24 @@
 #
 # @summary Manage primary server
 #
-class easy_ipa::install::server::master {
+class easy_ipa::server::master {
   $server_install_cmd = "\
 /usr/sbin/ipa-server-install \
-  ${easy_ipa::install::server::server_install_cmd_opts_hostname} \
+  ${easy_ipa::server::server_install_cmd_opts_hostname} \
   --realm=${easy_ipa::final_realm} \
   --domain=${easy_ipa::domain} \
   --admin-password='${easy_ipa::admin_password}' \
   --ds-password='${easy_ipa::directory_services_password}' \
-  ${easy_ipa::install::server::server_install_cmd_opts_zone_overlap} \
-  ${easy_ipa::install::server::server_install_cmd_opts_dnssec_validation} \
-  ${easy_ipa::install::server::server_install_cmd_opts_setup_dns} \
-  ${easy_ipa::install::server::server_install_cmd_opts_forwarders} \
-  ${easy_ipa::install::server::server_install_cmd_opts_ip_address} \
-  ${easy_ipa::install::server::server_install_cmd_opts_no_ntp} \
-  ${easy_ipa::install::server::server_install_cmd_opts_idstart} \
-  ${easy_ipa::install::server::server_install_cmd_opts_idmax} \
-  ${easy_ipa::install::server::server_install_cmd_opts_no_ui_redirect} \
-  ${easy_ipa::install::server::server_install_cmd_opts_mkhomedir} \
+  ${easy_ipa::server::server_install_cmd_opts_zone_overlap} \
+  ${easy_ipa::server::server_install_cmd_opts_dnssec_validation} \
+  ${easy_ipa::server::server_install_cmd_opts_setup_dns} \
+  ${easy_ipa::server::server_install_cmd_opts_forwarders} \
+  ${easy_ipa::server::server_install_cmd_opts_ip_address} \
+  ${easy_ipa::server::server_install_cmd_opts_no_ntp} \
+  ${easy_ipa::server::server_install_cmd_opts_idstart} \
+  ${easy_ipa::server::server_install_cmd_opts_idmax} \
+  ${easy_ipa::server::server_install_cmd_opts_no_ui_redirect} \
+  ${easy_ipa::server::server_install_cmd_opts_mkhomedir} \
   ${easy_ipa::opt_no_ssh} \
   ${easy_ipa::opt_no_sshd} \
   --unattended"

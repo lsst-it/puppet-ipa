@@ -11,17 +11,17 @@
 * [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
 * [`easy_ipa::client`](#easy_ipa--client): Manage ipa client
 * [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
-* [`easy_ipa::install::server`](#easy_ipa--install--server): Manage IPA server install
-* [`easy_ipa::install::server::master`](#easy_ipa--install--server--master): Manage primary server
-* [`easy_ipa::install::server::replica`](#easy_ipa--install--server--replica): Manage replica install
 * [`easy_ipa::named`](#easy_ipa--named): Prepare the integrated named-pkcs11 service for local configuration
 * [`easy_ipa::packetfilter::server`](#easy_ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
 * [`easy_ipa::params`](#easy_ipa--params): Prevent havoc on unsupported operating systems.
+* [`easy_ipa::server`](#easy_ipa--server): Manage IPA server install
+* [`easy_ipa::server::master`](#easy_ipa--server--master): Manage primary server
+* [`easy_ipa::server::replica`](#easy_ipa--server--replica): Manage replica install
 
 #### Private Classes
 
 * `easy_ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
-* `easy_ipa::install::server::redhat`
+* `easy_ipa::server::redhat`
 
 ### Defined types
 
@@ -346,18 +346,6 @@ Manage ipa client
 
 Configures port and redirect overrides for the IPA server web UI.
 
-### <a name="easy_ipa--install--server"></a>`easy_ipa::install::server`
-
-Manage IPA server install
-
-### <a name="easy_ipa--install--server--master"></a>`easy_ipa::install::server::master`
-
-Manage primary server
-
-### <a name="easy_ipa--install--server--replica"></a>`easy_ipa::install::server::replica`
-
-Manage replica install
-
 ### <a name="easy_ipa--named"></a>`easy_ipa::named`
 
 fragments.
@@ -397,6 +385,18 @@ Traditionally this file would be used to abstract away operating system
 differences. Right now the main purpose is to prevent easy_ipa classes from
 causing havoc (e.g. partial configurations) on unsupported operating systems
 by failing early rather than later.
+
+### <a name="easy_ipa--server"></a>`easy_ipa::server`
+
+Manage IPA server install
+
+### <a name="easy_ipa--server--master"></a>`easy_ipa::server::master`
+
+Manage primary server
+
+### <a name="easy_ipa--server--replica"></a>`easy_ipa::server::replica`
+
+Manage replica install
 
 ## Defined types
 

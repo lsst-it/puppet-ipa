@@ -194,7 +194,7 @@ class easy_ipa (
   }
 
   if $easy_ipa::ipa_role == 'master' or $easy_ipa::ipa_role == 'replica' {
-    contain 'easy_ipa::install::server'
+    contain 'easy_ipa::server'
   } elsif $easy_ipa::ipa_role == 'client' {
     contain 'easy_ipa::client'
   }
