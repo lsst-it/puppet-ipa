@@ -1,13 +1,13 @@
 #
 # @summary Ensure that home directories get created on Debian and Ubuntu clients.
-# 
+#
 # This code is needed as the --mkhomedir parameter passed to ipa-client-install does
 # not configure PAM even though it does install the required packages.
 #
 # Currently Ubuntu 14.04/16.04 and Debian 8/9 are supported.
 #
 class easy_ipa::install::client::debian {
-  case $facts['os']['distro']['codename'] {
+  case fact('os.distro.codename') {
     /^(xenial|stretch|bionic|focal|buster|bullseye|jammy)$/: {
       # Ensure that required packages are present even if they do not get pulled
       # in as freeipa-client package dependencies

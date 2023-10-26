@@ -21,7 +21,7 @@ class easy_ipa::config::webui {
     # IPA switched to mod_ssl as the crypto engine for Apache as of version 4.7.0
     # see https://www.freeipa.org/page/Releases/4.7.0#Highlights_in_4.7.0
     # These are not needed for versions newer than 4.7.10
-    if versioncmp($facts['ipa_server_version'], '4.7.0') < 0 {
+    if versioncmp(fact('ipa_server_version'), '4.7.0') < 0 {
       exec { 'semanage-port-http_port_t':
         command => "semanage port -a -t http_port_t -p tcp ${proxy_https_port}",
         unless  => "semanage port -l|grep -E \"^http_port_t.*tcp.*${proxy_https_port}\"",

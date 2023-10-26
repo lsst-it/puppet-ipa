@@ -29,7 +29,7 @@ define easy_ipa::backup (
   Variant[Array[String], Array[Integer[0-59]], String, Integer[0-59]] $minute,
   Variant[Array[String], Array[Integer[0-7]],  String, Integer[0-7]]  $weekday = '*',
   Variant[Array[String], Array[Integer[1-31]], String, Integer[1-31]] $monthday = '*',
-  String                                                              $email = $facts['servermonitor'],
+  String                                                              $email = fact('servermonitor'),
   Boolean                                                             $timestamp = true,
 ) {
   $script = 'ipa-backup-wrapper.sh'
