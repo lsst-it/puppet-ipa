@@ -16,7 +16,6 @@
 * [`easy_ipa::install::server`](#easy_ipa--install--server): Manage IPA server install
 * [`easy_ipa::install::server::master`](#easy_ipa--install--server--master): Manage primary server
 * [`easy_ipa::install::server::replica`](#easy_ipa--install--server--replica): Manage replica install
-* [`easy_ipa::install::sssd`](#easy_ipa--install--sssd): Manage sssd install
 * [`easy_ipa::named`](#easy_ipa--named): Prepare the integrated named-pkcs11 service for local configuration
 * [`easy_ipa::packetfilter::server`](#easy_ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
 * [`easy_ipa::params`](#easy_ipa--params): Prevent havoc on unsupported operating systems.
@@ -74,7 +73,6 @@ The following parameters are available in the `easy_ipa` class:
 * [`idmax`](#-easy_ipa--idmax)
 * [`install_ipa_client`](#-easy_ipa--install_ipa_client)
 * [`install_ipa_server`](#-easy_ipa--install_ipa_server)
-* [`install_sssd`](#-easy_ipa--install_sssd)
 * [`ip_address`](#-easy_ipa--ip_address)
 * [`ipa_server_fqdn`](#-easy_ipa--ipa_server_fqdn)
 * [`ipa_master_fqdn`](#-easy_ipa--ipa_master_fqdn)
@@ -278,14 +276,6 @@ Data type: `Boolean`
 
 Default value: `true`
 
-##### <a name="-easy_ipa--install_sssd"></a>`install_sssd`
-
-Data type: `Boolean`
-
-(boolean) If true, then the sssd packages are installed.
-
-Default value: `true`
-
 ##### <a name="-easy_ipa--ip_address"></a>`ip_address`
 
 Data type: `Optional[Stdlib::IP::Address]`
@@ -396,10 +386,6 @@ Manage primary server
 ### <a name="easy_ipa--install--server--replica"></a>`easy_ipa::install::server::replica`
 
 Manage replica install
-
-### <a name="easy_ipa--install--sssd"></a>`easy_ipa::install::sssd`
-
-Manage sssd install
 
 ### <a name="easy_ipa--named"></a>`easy_ipa::named`
 

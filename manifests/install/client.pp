@@ -71,7 +71,6 @@ class easy_ipa::install::client {
       unless    => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
       creates   => '/etc/ipa/default.conf',
       logoutput => false,  # prevent passphrases from appearing in puppet log
-      before    => Service['sssd'],
       provider  => 'shell',
       require   => Package['ipa-client'],
     }
@@ -79,13 +78,5 @@ class easy_ipa::install::client {
 
   if $facts['os']['family'] == 'Debian' and $easy_ipa::mkhomedir {
     contain easy_ipa::install::client::debian
-  }
-
-  if $easy_ipa::install_sssd {
-    service { 'sssd':
-      ensure  => 'running',
-      enable  => true,
-      require => Package[$easy_ipa::params::sssd_package_name],
-    }
   }
 }

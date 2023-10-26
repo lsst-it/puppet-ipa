@@ -25,5 +25,4 @@ class easy_ipa::params {
   # These package names are the same on RedHat and Debian derivatives
   $ipa_server_package_name = 'ipa-server'
   $kstart_package_name = 'kstart'
-  $sssd_package_name = 'sssd-common'
 }
