@@ -1,7 +1,12 @@
 #
 # @summary Manage ipa client
 #
-class easy_ipa::client {
+# @param force_join
+#   Force the client to join the domain even if it is already joined.
+#
+class easy_ipa::client (
+  Boolean $force_join = false,
+) {
   unless $easy_ipa::domain_join_password {
     fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
   }
@@ -48,7 +53,7 @@ class easy_ipa::client {
     $client_install_cmd_opts_hostname = ''
   }
 
-  if fact('ipa_force_join') {
+  if $force_join {
     $client_install_cmd_opts_force_join= '--force-join'
   } else {
     $client_install_cmd_opts_force_join = ''

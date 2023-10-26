@@ -342,6 +342,20 @@ Default value: `false`
 
 Manage ipa client
 
+#### Parameters
+
+The following parameters are available in the `easy_ipa::client` class:
+
+* [`force_join`](#-easy_ipa--client--force_join)
+
+##### <a name="-easy_ipa--client--force_join"></a>`force_join`
+
+Data type: `Boolean`
+
+Force the client to join the domain even if it is already joined.
+
+Default value: `false`
+
 ### <a name="easy_ipa--config--webui"></a>`easy_ipa::config::webui`
 
 Configures port and redirect overrides for the IPA server web UI.
