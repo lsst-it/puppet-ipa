@@ -1,5 +1,5 @@
 # @api private
-class easy_ipa::install::server::redhat {
+class easy_ipa::server::redhat {
   assert_private()
 
   if versioncmp(fact('os.release.major'), '8') == 0 {

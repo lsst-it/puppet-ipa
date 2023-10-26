@@ -1,7 +1,7 @@
 #
 # @summary Manage IPA server install
 #
-class easy_ipa::install::server {
+class easy_ipa::server {
   if $easy_ipa::ipa_role != 'master' { # if replica or client
     unless $easy_ipa::final_domain_join_password {
       fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
@@ -12,7 +12,7 @@ class easy_ipa::install::server {
   }
 
   if fact('os.family') == 'RedHat' {
-    require easy_ipa::install::server::redhat
+    require easy_ipa::server::redhat
   }
 
   $dns_packages = [
@@ -111,12 +111,12 @@ class easy_ipa::install::server {
   }
 
   if $easy_ipa::ipa_role == 'master' {
-    contain 'easy_ipa::install::server::master'
-    Class['easy_ipa::install::server::master']
+    contain 'easy_ipa::server::master'
+    Class['easy_ipa::server::master']
     -> Class['easy_ipa::config::webui']
   } elsif $easy_ipa::ipa_role == 'replica' {
-    contain 'easy_ipa::install::server::replica'
-    Class['easy_ipa::install::server::replica']
+    contain 'easy_ipa::server::replica'
+    Class['easy_ipa::server::replica']
     -> Class['easy_ipa::config::webui']
   }
 
