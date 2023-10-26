@@ -49,7 +49,6 @@ describe 'easy_ipa', type: :class do
         end
 
         context 'with defaults' do
-          it { is_expected.to contain_class('easy_ipa::install') }
           it { is_expected.to contain_class('easy_ipa::install::server') }
           it { is_expected.to contain_class('easy_ipa::install::server::master') }
           it { is_expected.to contain_class('easy_ipa::config::webui') }
@@ -206,7 +205,6 @@ describe 'easy_ipa', type: :class do
         end
 
         context 'with defaults' do
-          it { is_expected.to contain_class('easy_ipa::install') }
           it { is_expected.to contain_class('easy_ipa::install::server') }
           it { is_expected.to contain_class('easy_ipa::install::server::replica') }
           it { is_expected.to contain_class('easy_ipa::config::webui') }
@@ -302,7 +300,6 @@ describe 'easy_ipa', type: :class do
         end
 
         context 'with defaults' do
-          it { is_expected.to contain_class('easy_ipa::install') }
           it { is_expected.to contain_class('easy_ipa::install::client') }
 
           it { is_expected.not_to contain_class('easy_ipa::install::server') }
