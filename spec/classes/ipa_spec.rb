@@ -27,6 +27,12 @@ describe 'easy_ipa', type: :class do
         )
       end
 
+      if facts[:os]['family'] == 'RedHat'
+        let(:client_package) { 'ipa-client' }
+      else
+        let(:client_package) { 'freeipa-client' }
+      end
+
       context 'as bad_val role' do
         let(:params) do
           {
@@ -61,7 +67,7 @@ describe 'easy_ipa', type: :class do
           it { is_expected.to contain_package('kstart') }
           it { is_expected.to contain_package('ipa-server') }
 
-          it { is_expected.not_to contain_package('ipa-client') }
+          it { is_expected.not_to contain_package(client_package) }
         end
 
         context 'with idmax' do
@@ -217,7 +223,7 @@ describe 'easy_ipa', type: :class do
           it { is_expected.to contain_package('kstart') }
           it { is_expected.to contain_package('ipa-server') }
 
-          it { is_expected.not_to contain_package('ipa-client') }
+          it { is_expected.not_to contain_package(client_package) }
         end
 
         context 'configure_ssh' do
@@ -307,7 +313,7 @@ describe 'easy_ipa', type: :class do
           it { is_expected.not_to contain_class('easy_ipa::server::replica') }
           it { is_expected.not_to contain_class('easy_ipa::config::webui') }
 
-          it { is_expected.to contain_package('ipa-client').that_comes_before('Exec[client_install_ipa.rpsec.example.lan]') }
+          it { is_expected.to contain_package(client_package).that_comes_before('Exec[client_install_ipa.rpsec.example.lan]') }
           it { is_expected.to contain_package('kstart') }
           it { is_expected.not_to contain_package('ipa-server-dns') }
           it { is_expected.not_to contain_package('bind-dyndb-ldap') }

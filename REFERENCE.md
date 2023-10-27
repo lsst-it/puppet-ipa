@@ -346,7 +346,16 @@ Manage ipa client
 
 The following parameters are available in the `easy_ipa::client` class:
 
+* [`package_name`](#-easy_ipa--client--package_name)
 * [`force_join`](#-easy_ipa--client--force_join)
+
+##### <a name="-easy_ipa--client--package_name"></a>`package_name`
+
+Data type: `Array[String]`
+
+The name of the package(s) to install.
+
+Default value: `undef`
 
 ##### <a name="-easy_ipa--client--force_join"></a>`force_join`
 

@@ -1,10 +1,14 @@
 #
 # @summary Manage ipa client
 #
+# @param package_name
+#  The name of the package(s) to install.
+#
 # @param force_join
 #   Force the client to join the domain even if it is already joined.
 #
 class easy_ipa::client (
+  Array[String] $package_name = undef,
   Boolean $force_join = false,
 ) {
   unless $easy_ipa::domain_join_password {
@@ -14,14 +18,7 @@ class easy_ipa::client (
     fail("When creating a ${easy_ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
   }
 
-  package { 'ipa-client':
-    ensure => $easy_ipa::params::ipa_client_package_ensure,
-    name   => $easy_ipa::params::ipa_client_package_name,
-  }
-
-  package { $easy_ipa::params::kstart_package_name:
-    ensure => present,
-  }
+  ensure_packages($package_name)
 
   if $easy_ipa::mkhomedir {
     $client_install_cmd_opts_mkhomedir = '--mkhomedir'
@@ -76,16 +73,14 @@ class easy_ipa::client (
   ${easy_ipa::opt_no_sshd} \
   --unattended"
 
-  if $easy_ipa::params::ipa_client_package_ensure == 'present' {
-    exec { "client_install_${fact('networking.fqdn')}":
-      command   => $client_install_cmd,
-      timeout   => 0,
-      unless    => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
-      creates   => '/etc/ipa/default.conf',
-      logoutput => false,  # prevent passphrases from appearing in puppet log
-      provider  => 'shell',
-      require   => Package['ipa-client'],
-    }
+  exec { "client_install_${fact('networking.fqdn')}":
+    command   => $client_install_cmd,
+    timeout   => 0,
+    unless    => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
+    creates   => '/etc/ipa/default.conf',
+    logoutput => false,  # prevent passphrases from appearing in puppet log
+    provider  => 'shell',
+    require   => Package[$package_name],
   }
 
   if fact('os.family') == 'Debian' and $easy_ipa::mkhomedir {

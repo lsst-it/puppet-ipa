@@ -1,0 +1,4 @@
+---
+easy_ipa::client::package_name:
+  - freeipa-client
+  - kstart
