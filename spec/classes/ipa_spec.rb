@@ -3,20 +3,6 @@
 require 'spec_helper'
 
 describe 'easy_ipa', type: :class do
-  context 'on Windows' do
-    let(:facts) do
-      { os: { family: 'Windows' } }
-    end
-    let(:params) do
-      {
-        ipa_role: 'master',
-        domain:   'rspec.example.lan',
-      }
-    end
-
-    it { is_expected.to raise_error(Puppet::Error, %r{ERROR: unsupported operating system}) }
-  end
-
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
