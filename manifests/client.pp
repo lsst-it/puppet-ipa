@@ -62,7 +62,7 @@ class easy_ipa::client (
   --realm=${easy_ipa::final_realm} \
   --domain=${easy_ipa::domain} \
   --principal='${easy_ipa::domain_join_principal}' \
-  --password='${easy_ipa::final_domain_join_password}' \
+  --password=\"\${IPA_DOMAIN_JOIN_PASSWORD}\" \
   ${client_install_cmd_opts_dns_updates} \
   ${client_install_cmd_opts_hostname} \
   ${client_install_cmd_opts_mkhomedir} \
@@ -73,14 +73,15 @@ class easy_ipa::client (
   ${easy_ipa::opt_no_sshd} \
   --unattended"
 
-  exec { "client_install_${fact('networking.fqdn')}":
-    command   => $client_install_cmd,
-    timeout   => 0,
-    unless    => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
-    creates   => '/etc/ipa/default.conf',
-    logoutput => false,  # prevent passphrases from appearing in puppet log
-    provider  => 'shell',
-    require   => Package[$package_name],
+  exec { 'ipa-client-install':
+    environment => "IPA_DOMAIN_JOIN_PASSWORD=${easy_ipa::final_domain_join_password}",
+    command     => $client_install_cmd,
+    timeout     => 0,
+    unless      => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
+    creates     => '/etc/ipa/default.conf',
+    logoutput   => on_failure,
+    provider    => shell,
+    require     => Package[$package_name],
   }
 
   if fact('os.family') == 'Debian' and $easy_ipa::mkhomedir {

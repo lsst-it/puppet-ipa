@@ -3,11 +3,11 @@
 #
 class easy_ipa::server {
   if $easy_ipa::ipa_role != 'master' { # if replica or client
-    unless $easy_ipa::final_domain_join_password {
-      fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
-    }
     unless $easy_ipa::ipa_master_fqdn {
       fail("When creating a ${easy_ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
+    }
+    unless $easy_ipa::admin_password {
+      fail("When creating a ${easy_ipa::ipa_role} the parameter named admin_password cannot be empty.")
     }
   }
 
@@ -114,10 +114,16 @@ class easy_ipa::server {
     contain 'easy_ipa::server::master'
     Class['easy_ipa::server::master']
     -> Class['easy_ipa::config::webui']
+
+    Class['easy_ipa::server::master']
+    -> Service['ipa']
   } elsif $easy_ipa::ipa_role == 'replica' {
     contain 'easy_ipa::server::replica'
     Class['easy_ipa::server::replica']
     -> Class['easy_ipa::config::webui']
+
+    Class['easy_ipa::server::replica']
+    -> Service['ipa']
   }
 
   ensure_resource (
@@ -129,9 +135,8 @@ class easy_ipa::server {
   contain 'easy_ipa::config::webui'
 
   service { 'ipa':
-    ensure  => 'running',
-    enable  => true,
-    require => Exec["server_install_${easy_ipa::ipa_server_fqdn}"],
+    ensure => running,
+    enable => true,
   }
 
   easy_ipa::helpers::flushcache { "server_${easy_ipa::ipa_server_fqdn}": }

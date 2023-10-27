@@ -49,8 +49,8 @@ describe 'easy_ipa', type: :class do
           {
             ipa_role:                    'master',
             domain:                      'rspec.example.lan',
-            admin_password:              'rspecrspec123',
-            directory_services_password: 'rspecrspec123',
+            admin_password:              'rspec-admin-password',
+            directory_services_password: 'rspedc-ds-password',
           }
         end
 
@@ -77,8 +77,12 @@ describe 'easy_ipa', type: :class do
           end
 
           it do
-            is_expected.to contain_exec('server_install_ipa.rpsec.example.lan').with(
-              logoutput: false
+            is_expected.to contain_exec('ipa-server-install').with(
+              environment: [
+                'IPA_ADMIN_PASSWORD=rspec-admin-password',
+                'IPA_DS_PASSWORD=rspedc-ds-password',
+              ],
+              logoutput: 'on_failure'
             ).
               with_command(%r{--idstart=10000}).
               with_command(%r{--idmax=20000})
@@ -91,10 +95,14 @@ describe 'easy_ipa', type: :class do
           end
 
           it do
-            is_expected.to contain_exec('server_install_ipa.rpsec.example.lan').with(
-              logoutput: false
+            is_expected.to contain_exec('ipa-server-install').with(
+              environment: [
+                'IPA_ADMIN_PASSWORD=rspec-admin-password',
+                'IPA_DS_PASSWORD=rspedc-ds-password',
+              ],
+              logoutput: 'on_failure'
             ).with_command(%r{--idstart=10000})
-            is_expected.not_to contain_exec('server_install_ipa.rpsec.example.lan').with_command(%r{--idmax})
+            is_expected.not_to contain_exec('ipa-server-install').with_command(%r{--idmax})
           end
         end
 
@@ -104,7 +112,7 @@ describe 'easy_ipa', type: :class do
               super().merge(configure_ssh: true)
             end
 
-            it { is_expected.not_to contain_exec('server_install_ipa.rpsec.example.lan').with_command(%r{--no-ssh(?!d)}) }
+            it { is_expected.not_to contain_exec('ipa-server-install').with_command(%r{--no-ssh(?!d)}) }
           end
 
           context 'false' do
@@ -113,8 +121,12 @@ describe 'easy_ipa', type: :class do
             end
 
             it {
-              is_expected.to contain_exec('server_install_ipa.rpsec.example.lan').with(
-                logoutput: false
+              is_expected.to contain_exec('ipa-server-install').with(
+                environment: [
+                  'IPA_ADMIN_PASSWORD=rspec-admin-password',
+                  'IPA_DS_PASSWORD=rspedc-ds-password',
+                ],
+                logoutput: 'on_failure'
               ).with_command(%r{--no-ssh(?!d)})
             }
           end
@@ -126,7 +138,7 @@ describe 'easy_ipa', type: :class do
               super().merge(configure_sshd: true)
             end
 
-            it { is_expected.not_to contain_exec('server_install_ipa.rpsec.example.lan').with_command(%r{--no-sshd}) }
+            it { is_expected.not_to contain_exec('ipa-server-install').with_command(%r{--no-sshd}) }
           end
 
           context 'false' do
@@ -135,8 +147,12 @@ describe 'easy_ipa', type: :class do
             end
 
             it {
-              is_expected.to contain_exec('server_install_ipa.rpsec.example.lan').with(
-                logoutput: false
+              is_expected.to contain_exec('ipa-server-install').with(
+                environment: [
+                  'IPA_ADMIN_PASSWORD=rspec-admin-password',
+                  'IPA_DS_PASSWORD=rspedc-ds-password',
+                ],
+                logoutput: 'on_failure'
               ).with_command(%r{--no-sshd})
             }
           end
@@ -206,7 +222,7 @@ describe 'easy_ipa', type: :class do
             ipa_role: 'replica',
             domain: 'rspec.example.lan',
             ipa_master_fqdn: 'ipa-server-1.rspec.example.lan',
-            domain_join_password: 'rspecrspec123',
+            admin_password: 'rspec-admin-password',
           }
         end
 
@@ -232,7 +248,7 @@ describe 'easy_ipa', type: :class do
               super().merge(configure_ssh: true)
             end
 
-            it { is_expected.not_to contain_exec('server_install_ipa.rpsec.example.lan').with_command(%r{--no-ssh(?!d)}) }
+            it { is_expected.not_to contain_exec('ipa-replica-install').with_command(%r{--no-ssh(?!d)}) }
           end
 
           context 'false' do
@@ -241,8 +257,9 @@ describe 'easy_ipa', type: :class do
             end
 
             it {
-              is_expected.to contain_exec('server_install_ipa.rpsec.example.lan').with(
-                logoutput: false
+              is_expected.to contain_exec('ipa-replica-install').with(
+                environment: ['IPA_ADMIN_PASSWORD=rspec-admin-password'],
+                logoutput: 'on_failure'
               ).with_command(%r{--no-ssh(?!d)})
             }
           end
@@ -254,7 +271,7 @@ describe 'easy_ipa', type: :class do
               super().merge(configure_sshd: true)
             end
 
-            it { is_expected.not_to contain_exec('server_install_ipa.rpsec.example.lan').with_command(%r{--no-sshd}) }
+            it { is_expected.not_to contain_exec('ipa-replica-install').with_command(%r{--no-sshd}) }
           end
 
           context 'false' do
@@ -263,8 +280,9 @@ describe 'easy_ipa', type: :class do
             end
 
             it {
-              is_expected.to contain_exec('server_install_ipa.rpsec.example.lan').with(
-                logoutput: false
+              is_expected.to contain_exec('ipa-replica-install').with(
+                environment: ['IPA_ADMIN_PASSWORD=rspec-admin-password'],
+                logoutput: 'on_failure'
               ).with_command(%r{--no-sshd})
             }
           end
@@ -286,12 +304,12 @@ describe 'easy_ipa', type: :class do
           it { is_expected.to raise_error(Puppet::Error, %r{expects a match for Stdlib::Fqdn}) }
         end
 
-        context 'missing domain_join_password' do
+        context 'missing admin_password' do
           let(:params) do
-            super().reject { |k| k == :domain_join_password }
+            super().reject { |k| k == :admin_password }
           end
 
-          it { is_expected.to raise_error(Puppet::Error, %r{domain_join_password cannot be empty}) }
+          it { is_expected.to raise_error(Puppet::Error, %r{admin_password cannot be empty}) }
         end
       end
 
@@ -301,7 +319,7 @@ describe 'easy_ipa', type: :class do
             ipa_role: 'client',
             domain: 'rspec.example.lan',
             ipa_master_fqdn: 'ipa-server-1.rspec.example.lan',
-            domain_join_password: 'rspecrspec123',
+            domain_join_password: 'rspec-domain-join-password',
           }
         end
 
@@ -313,7 +331,7 @@ describe 'easy_ipa', type: :class do
           it { is_expected.not_to contain_class('easy_ipa::server::replica') }
           it { is_expected.not_to contain_class('easy_ipa::config::webui') }
 
-          it { is_expected.to contain_package(client_package).that_comes_before('Exec[client_install_ipa.rpsec.example.lan]') }
+          it { is_expected.to contain_package(client_package).that_comes_before('Exec[ipa-client-install]') }
           it { is_expected.to contain_package('kstart') }
           it { is_expected.not_to contain_package('ipa-server-dns') }
           it { is_expected.not_to contain_package('bind-dyndb-ldap') }
@@ -326,7 +344,7 @@ describe 'easy_ipa', type: :class do
               super().merge(configure_ssh: true)
             end
 
-            it { is_expected.not_to contain_exec('client_install_ipa.rpsec.example.lan').with_command(%r{--no-ssh(?!d)}) }
+            it { is_expected.not_to contain_exec('ipa-client-install').with_command(%r{--no-ssh(?!d)}) }
           end
 
           context 'false' do
@@ -335,8 +353,9 @@ describe 'easy_ipa', type: :class do
             end
 
             it {
-              is_expected.to contain_exec('client_install_ipa.rpsec.example.lan').with(
-                logoutput: false
+              is_expected.to contain_exec('ipa-client-install').with(
+                environment: 'IPA_DOMAIN_JOIN_PASSWORD=rspec-domain-join-password',
+                logoutput: 'on_failure'
               ).with_command(%r{--no-ssh(?!d)})
             }
           end
@@ -348,7 +367,7 @@ describe 'easy_ipa', type: :class do
               super().merge(configure_sshd: true)
             end
 
-            it { is_expected.not_to contain_exec('client_install_ipa.rpsec.example.lan').with_command(%r{--no-sshd}) }
+            it { is_expected.not_to contain_exec('ipa-client-install').with_command(%r{--no-sshd}) }
           end
 
           context 'false' do
@@ -357,8 +376,9 @@ describe 'easy_ipa', type: :class do
             end
 
             it {
-              is_expected.to contain_exec('client_install_ipa.rpsec.example.lan').with(
-                logoutput: false
+              is_expected.to contain_exec('ipa-client-install').with(
+                environment: 'IPA_DOMAIN_JOIN_PASSWORD=rspec-domain-join-password',
+                logoutput: 'on_failure'
               ).with_command(%r{--no-sshd})
             }
           end
