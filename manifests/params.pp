@@ -9,20 +9,16 @@
 class easy_ipa::params {
   case fact('os.family') {
     'RedHat': {
-      $ipa_client_package_name = 'ipa-client'
-      $ipa_client_package_ensure = 'present'
       $named_conf_d = '/etc/named/conf.d'
     }
     'Debian': {
       case fact('os.distro.codename') {
         /(trusty|xenial|bionic|focal|bullseye|jammy)/: {
-          $ipa_client_package_ensure = 'present'
         }
         default: {
           fail('ERROR: unsupported operating system')
         }
       }
-      $ipa_client_package_name = 'freeipa-client'
     }
     default: {
       fail('ERROR: unsupported operating system!')
