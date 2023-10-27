@@ -7,17 +7,6 @@
 # by failing early rather than later.
 #
 class easy_ipa::params {
-  case fact('os.family') {
-    'RedHat': {
-      $named_conf_d = '/etc/named/conf.d'
-    }
-    'Debian': {
-    }
-    default: {
-      fail('ERROR: unsupported operating system!')
-    }
-  }
-
   # These package names are the same on RedHat and Debian derivatives
   $ipa_server_package_name = 'ipa-server'
   $kstart_package_name = 'kstart'

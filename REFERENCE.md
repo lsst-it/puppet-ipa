@@ -11,7 +11,6 @@
 * [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
 * [`easy_ipa::client`](#easy_ipa--client): Manage ipa client
 * [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
-* [`easy_ipa::named`](#easy_ipa--named): Prepare the integrated named-pkcs11 service for local configuration
 * [`easy_ipa::packetfilter::server`](#easy_ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
 * [`easy_ipa::params`](#easy_ipa--params): Prevent havoc on unsupported operating systems.
 * [`easy_ipa::server`](#easy_ipa--server): Manage IPA server install
@@ -26,7 +25,6 @@
 ### Defined types
 
 * [`easy_ipa::backup`](#easy_ipa--backup): Define easy_ipa::backup
-* [`easy_ipa::config::named`](#easy_ipa--config--named): Add custom named.conf fragment.
 * [`easy_ipa::helpers::flushcache`](#easy_ipa--helpers--flushcache): Manage cache flushing
 
 ### Plans
@@ -369,12 +367,6 @@ Default value: `false`
 
 Configures port and redirect overrides for the IPA server web UI.
 
-### <a name="easy_ipa--named"></a>`easy_ipa::named`
-
-fragments.
-
-This is only supposed to work on RHEL/CentOS.
-
 ### <a name="easy_ipa--packetfilter--server"></a>`easy_ipa::packetfilter::server`
 
 Install packet filtering rules for FreeIPA.
@@ -496,41 +488,6 @@ Data type: `String`
 Email to send cron notifications to. Defaults to $::servermonitor.
 
 Default value: `fact('servermonitor')`
-
-### <a name="easy_ipa--config--named"></a>`easy_ipa::config::named`
-
-Add custom named.conf fragment.
-
-#### Parameters
-
-The following parameters are available in the `easy_ipa::config::named` defined type:
-
-* [`basename`](#-easy_ipa--config--named--basename)
-* [`content`](#-easy_ipa--config--named--content)
-* [`notify_named`](#-easy_ipa--config--named--notify_named)
-
-##### <a name="-easy_ipa--config--named--basename"></a>`basename`
-
-Data type: `String`
-
-(string) Basename of the configuration fragment, without the ".conf" at the end. Defaults to $title.
-
-Default value: `$title`
-
-##### <a name="-easy_ipa--config--named--content"></a>`content`
-
-Data type: `String`
-
-(string) The value to pass to the File resource's "content" parameter. For example
-template('profile/templates/tsig-key.erb').
-
-##### <a name="-easy_ipa--config--named--notify_named"></a>`notify_named`
-
-Data type: `Boolean`
-
-(boolean) Whether to restart named-pkcs11 on config changes. Defaults to false.
-
-Default value: `false`
 
 ### <a name="easy_ipa--helpers--flushcache"></a>`easy_ipa::helpers::flushcache`
 
