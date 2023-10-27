@@ -5,7 +5,7 @@ class easy_ipa::server::replica {
   $replica_install_cmd = "\
 /usr/sbin/ipa-replica-install \
   --principal=${easy_ipa::domain_join_principal} \
-  --admin-password='${easy_ipa::domain_join_password}' \
+  --admin-password=\"\${IPA_ADMIN_PASSWORD}\" \
   ${easy_ipa::server::server_install_cmd_opts_hostname} \
   --realm=${easy_ipa::final_realm} \
   --domain=${easy_ipa::domain} \
@@ -23,14 +23,14 @@ class easy_ipa::server::replica {
   ${easy_ipa::opt_no_sshd} \
   --unattended"
 
-  # TODO: config-show and grep for IPA\ masters
-  exec { "server_install_${easy_ipa::ipa_server_fqdn}":
-    command   => $replica_install_cmd,
-    timeout   => 0,
-    unless    => '/usr/sbin/ipactl status >/dev/null 2>&1',
-    creates   => '/etc/ipa/default.conf',
-    logoutput => false,  # prevent passphrases from appearing in puppet log
-    notify    => Easy_ipa::Helpers::Flushcache["server_${easy_ipa::ipa_server_fqdn}"],
+  exec { 'ipa-replica-install':
+    environment => "IPA_ADMIN_PASSWORD=${easy_ipa::admin_password}",
+    command     => $replica_install_cmd,
+    timeout     => 0,
+    unless      => '/usr/sbin/ipactl status >/dev/null 2>&1',
+    creates     => '/etc/ipa/default.conf',
+    logoutput   => on_failure,
+    notify      => Easy_ipa::Helpers::Flushcache["server_${easy_ipa::ipa_server_fqdn}"],
   }
   -> cron { 'k5start_root':
     command => '/usr/bin/k5start -f /etc/krb5.keytab -U -o root -k /tmp/krb5cc_0 > /dev/null 2>&1',
