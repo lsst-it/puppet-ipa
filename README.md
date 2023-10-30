@@ -10,7 +10,6 @@ and refactored with a focus on simplicity and ease of use.
 
 ### Example usage:
 
-Creating an IPA master, with the WebUI proxied to `https://localhost:8440`.
 ```puppet
 class {'easy_ipa':
     ipa_role                    => 'master',
@@ -21,7 +20,6 @@ class {'easy_ipa':
     ip_address                  => '192.168.56.35',
     enable_ip_address           => true,
     enable_hostname             => true,
-    webui_enable_proxy          => true,
 }
 ```
 

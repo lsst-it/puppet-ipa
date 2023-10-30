@@ -111,27 +111,15 @@ class easy_ipa::server (
 
   if $easy_ipa::ipa_role == 'master' {
     contain 'easy_ipa::server::master'
-    Class['easy_ipa::server::master']
-    -> Class['easy_ipa::config::webui']
 
     Class['easy_ipa::server::master']
     -> Service['ipa']
   } elsif $easy_ipa::ipa_role == 'replica' {
     contain 'easy_ipa::server::replica'
-    Class['easy_ipa::server::replica']
-    -> Class['easy_ipa::config::webui']
 
     Class['easy_ipa::server::replica']
     -> Service['ipa']
   }
-
-  ensure_resource (
-    'service',
-    'httpd',
-    { ensure => 'running' },
-  )
-
-  contain 'easy_ipa::config::webui'
 
   service { 'ipa':
     ensure => running,

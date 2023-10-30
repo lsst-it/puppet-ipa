@@ -66,11 +66,6 @@
 # @param idstart
 #      (integer) From the IPA man pages: "The starting user and group id number".
 #
-# @param gssapi_no_negotiate
-#      (pattern) Suppress setting Negotiate headers based on BrowserMatch.
-#               Not sending these headers is useful to work around browsers that do not handle them properly (and incorrectly show
-#               authentication popups to users). Example: "Windows". Default undef.
-#
 # @param idmax
 #      (integer) From the IPA man pages: "The max value for the IDs range (default: idstart+199999)".
 #
@@ -92,16 +87,6 @@
 #
 # @param realm
 #      (string) The name of the IPA realm to create or join.
-#
-# @param webui_enable_proxy
-#      (boolean) If true, then httpd is configured to act as a reverse proxy for the IPA Web UI. This allows
-#                for the Web UI to be accessed from different ports and hostnames than the default.
-#
-# @param webui_proxy_external_fqdn
-#      (string) The public or external FQDN used to access the IPA Web UI behind the reverse proxy.
-#
-# @param webui_proxy_https_port
-#      (integer) The HTTPS port to use for the reverse proxy. Cannot be 443.
 #
 # @param adjust_login_defs
 #      (boolean) Adjust UID_MAX and GID_MAX in login.defs. Without this newer server installers fail. Default false.
@@ -131,7 +116,6 @@ class easy_ipa (
   Boolean $enable_hostname                         = true,
   Boolean $enable_ip_address                       = false,
   Boolean $fixed_primary                           = false,
-  Variant[Pattern,Undef] $gssapi_no_negotiate      = undef,
   Integer[10000] $idstart                          = (fqdn_rand('10737') + 10000),
   Variant[Integer,Undef] $idmax                    = undef,
   Optional[Stdlib::IP::Address] $ip_address        = undef,
@@ -140,9 +124,6 @@ class easy_ipa (
   Boolean $mkhomedir                               = true,
   Boolean $no_ui_redirect                          = false,
   Optional[Stdlib::Fqdn] $realm                    = undef,
-  Boolean $webui_enable_proxy                      = false,
-  String $webui_proxy_external_fqdn                = 'localhost',
-  String $webui_proxy_https_port                   = '8440',
   Boolean $adjust_login_defs                       = false,
 ) {
   if $easy_ipa::idmax and $easy_ipa::idmax < $easy_ipa::idstart {
