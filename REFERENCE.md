@@ -10,7 +10,6 @@
 
 * [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
 * [`easy_ipa::client`](#easy_ipa--client): Manage ipa client
-* [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
 * [`easy_ipa::packetfilter::server`](#easy_ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
 * [`easy_ipa::server`](#easy_ipa--server): Manage IPA server install
 * [`easy_ipa::server::master`](#easy_ipa--server--master): Manage primary server
@@ -72,9 +71,6 @@ The following parameters are available in the `easy_ipa` class:
 * [`mkhomedir`](#-easy_ipa--mkhomedir)
 * [`no_ui_redirect`](#-easy_ipa--no_ui_redirect)
 * [`realm`](#-easy_ipa--realm)
-* [`webui_enable_proxy`](#-easy_ipa--webui_enable_proxy)
-* [`webui_proxy_external_fqdn`](#-easy_ipa--webui_proxy_external_fqdn)
-* [`webui_proxy_https_port`](#-easy_ipa--webui_proxy_https_port)
 * [`adjust_login_defs`](#-easy_ipa--adjust_login_defs)
 
 ##### <a name="-easy_ipa--domain"></a>`domain`
@@ -302,31 +298,6 @@ Data type: `Optional[Stdlib::Fqdn]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--webui_enable_proxy"></a>`webui_enable_proxy`
-
-Data type: `Boolean`
-
-(boolean) If true, then httpd is configured to act as a reverse proxy for the IPA Web UI. This allows
-          for the Web UI to be accessed from different ports and hostnames than the default.
-
-Default value: `false`
-
-##### <a name="-easy_ipa--webui_proxy_external_fqdn"></a>`webui_proxy_external_fqdn`
-
-Data type: `String`
-
-(string) The public or external FQDN used to access the IPA Web UI behind the reverse proxy.
-
-Default value: `'localhost'`
-
-##### <a name="-easy_ipa--webui_proxy_https_port"></a>`webui_proxy_https_port`
-
-Data type: `String`
-
-(integer) The HTTPS port to use for the reverse proxy. Cannot be 443.
-
-Default value: `'8440'`
-
 ##### <a name="-easy_ipa--adjust_login_defs"></a>`adjust_login_defs`
 
 Data type: `Boolean`
@@ -361,10 +332,6 @@ Data type: `Boolean`
 Force the client to join the domain even if it is already joined.
 
 Default value: `false`
-
-### <a name="easy_ipa--config--webui"></a>`easy_ipa::config::webui`
-
-Configures port and redirect overrides for the IPA server web UI.
 
 ### <a name="easy_ipa--packetfilter--server"></a>`easy_ipa::packetfilter::server`
 

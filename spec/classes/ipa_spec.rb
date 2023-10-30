@@ -43,7 +43,6 @@ describe 'easy_ipa', type: :class do
         context 'with defaults' do
           it { is_expected.to contain_class('easy_ipa::server') }
           it { is_expected.to contain_class('easy_ipa::server::master') }
-          it { is_expected.to contain_class('easy_ipa::config::webui') }
 
           it { is_expected.not_to contain_class('easy_ipa::server::replica') }
           it { is_expected.not_to contain_class('easy_ipa::client') }
@@ -215,7 +214,6 @@ describe 'easy_ipa', type: :class do
         context 'with defaults' do
           it { is_expected.to contain_class('easy_ipa::server') }
           it { is_expected.to contain_class('easy_ipa::server::replica') }
-          it { is_expected.to contain_class('easy_ipa::config::webui') }
 
           it { is_expected.not_to contain_class('easy_ipa::server::master') }
           it { is_expected.not_to contain_class('easy_ipa::client') }
@@ -315,7 +313,6 @@ describe 'easy_ipa', type: :class do
           it { is_expected.not_to contain_class('easy_ipa::server') }
           it { is_expected.not_to contain_class('easy_ipa::server::master') }
           it { is_expected.not_to contain_class('easy_ipa::server::replica') }
-          it { is_expected.not_to contain_class('easy_ipa::config::webui') }
 
           it { is_expected.to contain_package(client_package).that_comes_before('Exec[ipa-client-install]') }
           it { is_expected.to contain_package('kstart') }
