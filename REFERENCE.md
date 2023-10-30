@@ -12,7 +12,6 @@
 * [`easy_ipa::client`](#easy_ipa--client): Manage ipa client
 * [`easy_ipa::config::webui`](#easy_ipa--config--webui): Configures port and redirect overrides for the IPA server web UI.
 * [`easy_ipa::packetfilter::server`](#easy_ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
-* [`easy_ipa::params`](#easy_ipa--params): Prevent havoc on unsupported operating systems.
 * [`easy_ipa::server`](#easy_ipa--server): Manage IPA server install
 * [`easy_ipa::server::master`](#easy_ipa--server--master): Manage primary server
 * [`easy_ipa::server::replica`](#easy_ipa--server--replica): Manage replica install
@@ -394,16 +393,23 @@ IPv6 address to allow access from.
 
 Default value: `'::1'`
 
-### <a name="easy_ipa--params"></a>`easy_ipa::params`
-
-Traditionally this file would be used to abstract away operating system
-differences. Right now the main purpose is to prevent easy_ipa classes from
-causing havoc (e.g. partial configurations) on unsupported operating systems
-by failing early rather than later.
-
 ### <a name="easy_ipa--server"></a>`easy_ipa::server`
 
 Manage IPA server install
+
+#### Parameters
+
+The following parameters are available in the `easy_ipa::server` class:
+
+* [`package_name`](#-easy_ipa--server--package_name)
+
+##### <a name="-easy_ipa--server--package_name"></a>`package_name`
+
+Data type: `Array[String]`
+
+The name of the package(s) to install.
+
+Default value: `undef`
 
 ### <a name="easy_ipa--server--master"></a>`easy_ipa::server::master`
 
