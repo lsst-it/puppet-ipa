@@ -145,9 +145,6 @@ class easy_ipa (
   String $webui_proxy_https_port                   = '8440',
   Boolean $adjust_login_defs                       = false,
 ) {
-  # Include per-OS parameters and fail on unsupported OS
-  include easy_ipa::params
-
   if $easy_ipa::idmax and $easy_ipa::idmax < $easy_ipa::idstart {
     fail('Parameter "idmax" must be an integer greater than parameter "idstart".')
   }

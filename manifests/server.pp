@@ -1,7 +1,12 @@
 #
 # @summary Manage IPA server install
 #
-class easy_ipa::server {
+# @param package_name
+#  The name of the package(s) to install.
+#
+class easy_ipa::server (
+  Array[String] $package_name = undef,
+) {
   if $easy_ipa::ipa_role != 'master' { # if replica or client
     unless $easy_ipa::ipa_master_fqdn {
       fail("When creating a ${easy_ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
@@ -15,6 +20,8 @@ class easy_ipa::server {
     require easy_ipa::server::redhat
   }
 
+  ensure_packages($package_name)
+
   $dns_packages = [
     'ipa-server-dns',
     'bind-dyndb-ldap',
@@ -22,14 +29,6 @@ class easy_ipa::server {
 
   if $easy_ipa::final_configure_dns_server {
     ensure_packages($dns_packages)
-  }
-
-  package { $easy_ipa::params::ipa_server_package_name:
-    ensure => present,
-  }
-
-  package { $easy_ipa::params::kstart_package_name:
-    ensure => present,
   }
 
   $server_install_cmd_opts_idstart = "--idstart=${easy_ipa::idstart}"

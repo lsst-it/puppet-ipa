@@ -39,6 +39,5 @@ class easy_ipa::server::master {
     command => '/usr/bin/k5start -f /etc/krb5.keytab -U -o root -k /tmp/krb5cc_0 > /dev/null 2>&1',
     user    => 'root',
     minute  => '*/1',
-    require => Package[$easy_ipa::params::kstart_package_name],
   }
 }
