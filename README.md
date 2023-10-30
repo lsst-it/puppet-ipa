@@ -293,22 +293,3 @@ Steps to get started:
  1. Run `vagrant up` in a terminal window from the root of the repo.
  1. Open a browser and navigate to `https://localhost:8440`.
  Log in with username `admin` and password `vagrant123`.
-
-## License
-jpuskar/puppet-easy_ipa forked from:
-huit/puppet-ipa - Puppet module that can manage an IPA master, replicas and clients.
-
-    Copyright (C) 2013 Harvard University Information Technology
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
