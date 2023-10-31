@@ -1,7 +1,10 @@
 #
 # @summary Manage cache flushing
 #
-define easy_ipa::helpers::flushcache {
+# @api private
+class easy_ipa::server::flushcache {
+  assert_private()
+
   #TODO: nscd should be called on both platforms.
   if fact('os.family') == 'RedHat' {
     $ipa_fluch_cache_cmd = "\
@@ -23,7 +26,7 @@ fi"
     fail('The class easy_ipa::flushcache is only written for RedHat and Debian.')
   }
 
-  exec { "ipa_flushcache_${title}":
+  exec { 'ipa_flushcache':
     command     => "/bin/bash -c ${ipa_fluch_cache_cmd}",
     returns     => ['0','1','2'],
     refreshonly => true,
