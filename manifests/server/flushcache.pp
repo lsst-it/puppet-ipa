@@ -2,7 +2,7 @@
 # @summary Manage cache flushing
 #
 # @api private
-class easy_ipa::server::flushcache {
+class ipa::server::flushcache {
   assert_private()
 
   #TODO: nscd should be called on both platforms.
@@ -23,7 +23,7 @@ else \
   /usr/bin/find /var/lib/sss/db -type f -exec rm -f \"{}\" ; ; \
 fi"
   } else {
-    fail('The class easy_ipa::flushcache is only written for RedHat and Debian.')
+    fail('The class ipa::flushcache is only written for RedHat and Debian.')
   }
 
   exec { 'ipa_flushcache':

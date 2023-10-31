@@ -8,31 +8,31 @@
 
 #### Public Classes
 
-* [`easy_ipa`](#easy_ipa): Manages IPA masters, replicas and clients.
-* [`easy_ipa::client`](#easy_ipa--client): Manage ipa client
-* [`easy_ipa::packetfilter::server`](#easy_ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
-* [`easy_ipa::server`](#easy_ipa--server): Manage IPA server install
-* [`easy_ipa::server::master`](#easy_ipa--server--master): Manage primary server
-* [`easy_ipa::server::replica`](#easy_ipa--server--replica): Manage replica install
+* [`ipa`](#ipa): Manages IPA masters, replicas and clients.
+* [`ipa::client`](#ipa--client): Manage ipa client
+* [`ipa::packetfilter::server`](#ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
+* [`ipa::server`](#ipa--server): Manage IPA server install
+* [`ipa::server::master`](#ipa--server--master): Manage primary server
+* [`ipa::server::replica`](#ipa--server--replica): Manage replica install
 
 #### Private Classes
 
-* `easy_ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
-* `easy_ipa::server::flushcache`: Manage cache flushing
-* `easy_ipa::server::redhat`
+* `ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
+* `ipa::server::flushcache`: Manage cache flushing
+* `ipa::server::redhat`
 
 ### Defined types
 
-* [`easy_ipa::backup`](#easy_ipa--backup): Define easy_ipa::backup
+* [`ipa::backup`](#ipa--backup): Define ipa::backup
 
 ### Plans
 
-* [`easy_ipa::update_host_keys`](#easy_ipa--update_host_keys): Update host keys for a domain-joined node in FreeIPA to match real host
+* [`ipa::update_host_keys`](#ipa--update_host_keys): Update host keys for a domain-joined node in FreeIPA to match real host
 keys.
 
 ## Classes
 
-### <a name="easy_ipa"></a>`easy_ipa`
+### <a name="ipa"></a>`ipa`
 
 TODO: Allow creation of root zone for isolated networks -- https://www.freeipa.org/page/Howto/DNS_in_isolated_networks
 TODO: Class comments.
@@ -42,49 +42,49 @@ TODO: configurable admin username.
 
 #### Parameters
 
-The following parameters are available in the `easy_ipa` class:
+The following parameters are available in the `ipa` class:
 
-* [`domain`](#-easy_ipa--domain)
-* [`ipa_role`](#-easy_ipa--ipa_role)
-* [`admin_password`](#-easy_ipa--admin_password)
-* [`directory_services_password`](#-easy_ipa--directory_services_password)
-* [`allow_zone_overlap`](#-easy_ipa--allow_zone_overlap)
-* [`no_dnssec_validation`](#-easy_ipa--no_dnssec_validation)
-* [`configure_dns_server`](#-easy_ipa--configure_dns_server)
-* [`configure_replica_ca`](#-easy_ipa--configure_replica_ca)
-* [`configure_ntp`](#-easy_ipa--configure_ntp)
-* [`configure_ssh`](#-easy_ipa--configure_ssh)
-* [`configure_sshd`](#-easy_ipa--configure_sshd)
-* [`custom_dns_forwarders`](#-easy_ipa--custom_dns_forwarders)
-* [`domain_join_principal`](#-easy_ipa--domain_join_principal)
-* [`domain_join_password`](#-easy_ipa--domain_join_password)
-* [`enable_dns_updates`](#-easy_ipa--enable_dns_updates)
-* [`enable_hostname`](#-easy_ipa--enable_hostname)
-* [`enable_ip_address`](#-easy_ipa--enable_ip_address)
-* [`fixed_primary`](#-easy_ipa--fixed_primary)
-* [`idstart`](#-easy_ipa--idstart)
-* [`idmax`](#-easy_ipa--idmax)
-* [`ip_address`](#-easy_ipa--ip_address)
-* [`ipa_server_fqdn`](#-easy_ipa--ipa_server_fqdn)
-* [`ipa_master_fqdn`](#-easy_ipa--ipa_master_fqdn)
-* [`mkhomedir`](#-easy_ipa--mkhomedir)
-* [`no_ui_redirect`](#-easy_ipa--no_ui_redirect)
-* [`realm`](#-easy_ipa--realm)
-* [`adjust_login_defs`](#-easy_ipa--adjust_login_defs)
+* [`domain`](#-ipa--domain)
+* [`ipa_role`](#-ipa--ipa_role)
+* [`admin_password`](#-ipa--admin_password)
+* [`directory_services_password`](#-ipa--directory_services_password)
+* [`allow_zone_overlap`](#-ipa--allow_zone_overlap)
+* [`no_dnssec_validation`](#-ipa--no_dnssec_validation)
+* [`configure_dns_server`](#-ipa--configure_dns_server)
+* [`configure_replica_ca`](#-ipa--configure_replica_ca)
+* [`configure_ntp`](#-ipa--configure_ntp)
+* [`configure_ssh`](#-ipa--configure_ssh)
+* [`configure_sshd`](#-ipa--configure_sshd)
+* [`custom_dns_forwarders`](#-ipa--custom_dns_forwarders)
+* [`domain_join_principal`](#-ipa--domain_join_principal)
+* [`domain_join_password`](#-ipa--domain_join_password)
+* [`enable_dns_updates`](#-ipa--enable_dns_updates)
+* [`enable_hostname`](#-ipa--enable_hostname)
+* [`enable_ip_address`](#-ipa--enable_ip_address)
+* [`fixed_primary`](#-ipa--fixed_primary)
+* [`idstart`](#-ipa--idstart)
+* [`idmax`](#-ipa--idmax)
+* [`ip_address`](#-ipa--ip_address)
+* [`ipa_server_fqdn`](#-ipa--ipa_server_fqdn)
+* [`ipa_master_fqdn`](#-ipa--ipa_master_fqdn)
+* [`mkhomedir`](#-ipa--mkhomedir)
+* [`no_ui_redirect`](#-ipa--no_ui_redirect)
+* [`realm`](#-ipa--realm)
+* [`adjust_login_defs`](#-ipa--adjust_login_defs)
 
-##### <a name="-easy_ipa--domain"></a>`domain`
+##### <a name="-ipa--domain"></a>`domain`
 
 Data type: `Stdlib::Fqdn`
 
 (string) The name of the IPA domain to create or join.
 
-##### <a name="-easy_ipa--ipa_role"></a>`ipa_role`
+##### <a name="-ipa--ipa_role"></a>`ipa_role`
 
 Data type: `Enum['client', 'master', 'replica']`
 
 (string) What role the node will be. Options are 'master', 'replica', and 'client'.
 
-##### <a name="-easy_ipa--admin_password"></a>`admin_password`
+##### <a name="-ipa--admin_password"></a>`admin_password`
 
 Data type: `Optional[String[8]]`
 
@@ -92,7 +92,7 @@ Data type: `Optional[String[8]]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--directory_services_password"></a>`directory_services_password`
+##### <a name="-ipa--directory_services_password"></a>`directory_services_password`
 
 Data type: `Optional[String[8]]`
 
@@ -100,7 +100,7 @@ Data type: `Optional[String[8]]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--allow_zone_overlap"></a>`allow_zone_overlap`
+##### <a name="-ipa--allow_zone_overlap"></a>`allow_zone_overlap`
 
 Data type: `Boolean`
 
@@ -111,7 +111,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--no_dnssec_validation"></a>`no_dnssec_validation`
+##### <a name="-ipa--no_dnssec_validation"></a>`no_dnssec_validation`
 
 Data type: `Boolean`
 
@@ -119,7 +119,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--configure_dns_server"></a>`configure_dns_server`
+##### <a name="-ipa--configure_dns_server"></a>`configure_dns_server`
 
 Data type: `Boolean`
 
@@ -128,7 +128,7 @@ Data type: `Boolean`
 
 Default value: `true`
 
-##### <a name="-easy_ipa--configure_replica_ca"></a>`configure_replica_ca`
+##### <a name="-ipa--configure_replica_ca"></a>`configure_replica_ca`
 
 Data type: `Boolean`
 
@@ -136,7 +136,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--configure_ntp"></a>`configure_ntp`
+##### <a name="-ipa--configure_ntp"></a>`configure_ntp`
 
 Data type: `Boolean`
 
@@ -145,7 +145,7 @@ Data type: `Boolean`
 
 Default value: `true`
 
-##### <a name="-easy_ipa--configure_ssh"></a>`configure_ssh`
+##### <a name="-ipa--configure_ssh"></a>`configure_ssh`
 
 Data type: `Boolean`
 
@@ -154,7 +154,7 @@ Data type: `Boolean`
 
 Default value: `true`
 
-##### <a name="-easy_ipa--configure_sshd"></a>`configure_sshd`
+##### <a name="-ipa--configure_sshd"></a>`configure_sshd`
 
 Data type: `Boolean`
 
@@ -163,7 +163,7 @@ Data type: `Boolean`
 
 Default value: `true`
 
-##### <a name="-easy_ipa--custom_dns_forwarders"></a>`custom_dns_forwarders`
+##### <a name="-ipa--custom_dns_forwarders"></a>`custom_dns_forwarders`
 
 Data type: `Array[String]`
 
@@ -172,7 +172,7 @@ Data type: `Array[String]`
 
 Default value: `[]`
 
-##### <a name="-easy_ipa--domain_join_principal"></a>`domain_join_principal`
+##### <a name="-ipa--domain_join_principal"></a>`domain_join_principal`
 
 Data type: `String[1]`
 
@@ -180,7 +180,7 @@ Data type: `String[1]`
 
 Default value: `'admin'`
 
-##### <a name="-easy_ipa--domain_join_password"></a>`domain_join_password`
+##### <a name="-ipa--domain_join_password"></a>`domain_join_password`
 
 Data type: `Optional[String[1]]`
 
@@ -188,7 +188,7 @@ Data type: `Optional[String[1]]`
 
 Default value: `$directory_services_password`
 
-##### <a name="-easy_ipa--enable_dns_updates"></a>`enable_dns_updates`
+##### <a name="-ipa--enable_dns_updates"></a>`enable_dns_updates`
 
 Data type: `Boolean`
 
@@ -196,7 +196,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--enable_hostname"></a>`enable_hostname`
+##### <a name="-ipa--enable_hostname"></a>`enable_hostname`
 
 Data type: `Boolean`
 
@@ -205,7 +205,7 @@ Data type: `Boolean`
 
 Default value: `true`
 
-##### <a name="-easy_ipa--enable_ip_address"></a>`enable_ip_address`
+##### <a name="-ipa--enable_ip_address"></a>`enable_ip_address`
 
 Data type: `Boolean`
 
@@ -214,7 +214,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--fixed_primary"></a>`fixed_primary`
+##### <a name="-ipa--fixed_primary"></a>`fixed_primary`
 
 Data type: `Boolean`
 
@@ -222,7 +222,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--idstart"></a>`idstart`
+##### <a name="-ipa--idstart"></a>`idstart`
 
 Data type: `Integer[10000]`
 
@@ -230,7 +230,7 @@ Data type: `Integer[10000]`
 
 Default value: `(fqdn_rand('10737') + 10000`
 
-##### <a name="-easy_ipa--idmax"></a>`idmax`
+##### <a name="-ipa--idmax"></a>`idmax`
 
 Data type: `Variant[Integer,Undef]`
 
@@ -238,7 +238,7 @@ Data type: `Variant[Integer,Undef]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--ip_address"></a>`ip_address`
+##### <a name="-ipa--ip_address"></a>`ip_address`
 
 Data type: `Optional[Stdlib::IP::Address]`
 
@@ -246,7 +246,7 @@ Data type: `Optional[Stdlib::IP::Address]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--ipa_server_fqdn"></a>`ipa_server_fqdn`
+##### <a name="-ipa--ipa_server_fqdn"></a>`ipa_server_fqdn`
 
 Data type: `String`
 
@@ -254,7 +254,7 @@ Data type: `String`
 
 Default value: `fact('networking.fqdn')`
 
-##### <a name="-easy_ipa--ipa_master_fqdn"></a>`ipa_master_fqdn`
+##### <a name="-ipa--ipa_master_fqdn"></a>`ipa_master_fqdn`
 
 Data type: `Optional[Stdlib::Fqdn]`
 
@@ -262,7 +262,7 @@ Data type: `Optional[Stdlib::Fqdn]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--mkhomedir"></a>`mkhomedir`
+##### <a name="-ipa--mkhomedir"></a>`mkhomedir`
 
 Data type: `Boolean`
 
@@ -271,7 +271,7 @@ installers.
 
 Default value: `true`
 
-##### <a name="-easy_ipa--no_ui_redirect"></a>`no_ui_redirect`
+##### <a name="-ipa--no_ui_redirect"></a>`no_ui_redirect`
 
 Data type: `Boolean`
 
@@ -279,7 +279,7 @@ Data type: `Boolean`
 
 Default value: `false`
 
-##### <a name="-easy_ipa--realm"></a>`realm`
+##### <a name="-ipa--realm"></a>`realm`
 
 Data type: `Optional[Stdlib::Fqdn]`
 
@@ -287,7 +287,7 @@ Data type: `Optional[Stdlib::Fqdn]`
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--adjust_login_defs"></a>`adjust_login_defs`
+##### <a name="-ipa--adjust_login_defs"></a>`adjust_login_defs`
 
 Data type: `Boolean`
 
@@ -295,18 +295,18 @@ Data type: `Boolean`
 
 Default value: `false`
 
-### <a name="easy_ipa--client"></a>`easy_ipa::client`
+### <a name="ipa--client"></a>`ipa::client`
 
 Manage ipa client
 
 #### Parameters
 
-The following parameters are available in the `easy_ipa::client` class:
+The following parameters are available in the `ipa::client` class:
 
-* [`package_name`](#-easy_ipa--client--package_name)
-* [`force_join`](#-easy_ipa--client--force_join)
+* [`package_name`](#-ipa--client--package_name)
+* [`force_join`](#-ipa--client--force_join)
 
-##### <a name="-easy_ipa--client--package_name"></a>`package_name`
+##### <a name="-ipa--client--package_name"></a>`package_name`
 
 Data type: `Array[String]`
 
@@ -314,7 +314,7 @@ The name of the package(s) to install.
 
 Default value: `undef`
 
-##### <a name="-easy_ipa--client--force_join"></a>`force_join`
+##### <a name="-ipa--client--force_join"></a>`force_join`
 
 Data type: `Boolean`
 
@@ -322,18 +322,18 @@ Force the client to join the domain even if it is already joined.
 
 Default value: `false`
 
-### <a name="easy_ipa--packetfilter--server"></a>`easy_ipa::packetfilter::server`
+### <a name="ipa--packetfilter--server"></a>`ipa::packetfilter::server`
 
 Install packet filtering rules for FreeIPA.
 
 #### Parameters
 
-The following parameters are available in the `easy_ipa::packetfilter::server` class:
+The following parameters are available in the `ipa::packetfilter::server` class:
 
-* [`allow_address_ipv4`](#-easy_ipa--packetfilter--server--allow_address_ipv4)
-* [`allow_address_ipv6`](#-easy_ipa--packetfilter--server--allow_address_ipv6)
+* [`allow_address_ipv4`](#-ipa--packetfilter--server--allow_address_ipv4)
+* [`allow_address_ipv6`](#-ipa--packetfilter--server--allow_address_ipv6)
 
-##### <a name="-easy_ipa--packetfilter--server--allow_address_ipv4"></a>`allow_address_ipv4`
+##### <a name="-ipa--packetfilter--server--allow_address_ipv4"></a>`allow_address_ipv4`
 
 Data type: `Variant[Stdlib::IP::Address::V4,Array[Stdlib::IP::Address::V4]]`
 
@@ -341,7 +341,7 @@ IPv4 address to allow access from.
 
 Default value: `'127.0.0.1'`
 
-##### <a name="-easy_ipa--packetfilter--server--allow_address_ipv6"></a>`allow_address_ipv6`
+##### <a name="-ipa--packetfilter--server--allow_address_ipv6"></a>`allow_address_ipv6`
 
 Data type: `Variant[Stdlib::IP::Address::V6,Array[Stdlib::IP::Address::V6]]`
 
@@ -349,17 +349,17 @@ IPv6 address to allow access from.
 
 Default value: `'::1'`
 
-### <a name="easy_ipa--server"></a>`easy_ipa::server`
+### <a name="ipa--server"></a>`ipa::server`
 
 Manage IPA server install
 
 #### Parameters
 
-The following parameters are available in the `easy_ipa::server` class:
+The following parameters are available in the `ipa::server` class:
 
-* [`package_name`](#-easy_ipa--server--package_name)
+* [`package_name`](#-ipa--server--package_name)
 
-##### <a name="-easy_ipa--server--package_name"></a>`package_name`
+##### <a name="-ipa--server--package_name"></a>`package_name`
 
 Data type: `Array[String]`
 
@@ -367,44 +367,44 @@ The name of the package(s) to install.
 
 Default value: `undef`
 
-### <a name="easy_ipa--server--master"></a>`easy_ipa::server::master`
+### <a name="ipa--server--master"></a>`ipa::server::master`
 
 Manage primary server
 
-### <a name="easy_ipa--server--replica"></a>`easy_ipa::server::replica`
+### <a name="ipa--server--replica"></a>`ipa::server::replica`
 
 Manage replica install
 
 ## Defined types
 
-### <a name="easy_ipa--backup"></a>`easy_ipa::backup`
+### <a name="ipa--backup"></a>`ipa::backup`
 
 Backup FreeIPA from cron
 
 #### Parameters
 
-The following parameters are available in the `easy_ipa::backup` defined type:
+The following parameters are available in the `ipa::backup` defined type:
 
-* [`title`](#-easy_ipa--backup--title)
-* [`type`](#-easy_ipa--backup--type)
-* [`timestamp`](#-easy_ipa--backup--timestamp)
-* [`monthday`](#-easy_ipa--backup--monthday)
-* [`weekday`](#-easy_ipa--backup--weekday)
-* [`hour`](#-easy_ipa--backup--hour)
-* [`minute`](#-easy_ipa--backup--minute)
-* [`email`](#-easy_ipa--backup--email)
+* [`title`](#-ipa--backup--title)
+* [`type`](#-ipa--backup--type)
+* [`timestamp`](#-ipa--backup--timestamp)
+* [`monthday`](#-ipa--backup--monthday)
+* [`weekday`](#-ipa--backup--weekday)
+* [`hour`](#-ipa--backup--hour)
+* [`minute`](#-ipa--backup--minute)
+* [`email`](#-ipa--backup--email)
 
-##### <a name="-easy_ipa--backup--title"></a>`title`
+##### <a name="-ipa--backup--title"></a>`title`
 
 The resource title is used as part of the the name for the cronjob.
 
-##### <a name="-easy_ipa--backup--type"></a>`type`
+##### <a name="-ipa--backup--type"></a>`type`
 
 Data type: `Enum['full','data']`
 
 Backup type. Either 'full' (offline) or 'data' (online).
 
-##### <a name="-easy_ipa--backup--timestamp"></a>`timestamp`
+##### <a name="-ipa--backup--timestamp"></a>`timestamp`
 
 Data type: `Boolean`
 
@@ -415,7 +415,7 @@ own.
 
 Default value: `true`
 
-##### <a name="-easy_ipa--backup--monthday"></a>`monthday`
+##### <a name="-ipa--backup--monthday"></a>`monthday`
 
 Data type: `Variant[Array[String], Array[Integer[1-31]], String, Integer[1-31]]`
 
@@ -423,7 +423,7 @@ Standard parameter for the cron resource.
 
 Default value: `'*'`
 
-##### <a name="-easy_ipa--backup--weekday"></a>`weekday`
+##### <a name="-ipa--backup--weekday"></a>`weekday`
 
 Data type: `Variant[Array[String], Array[Integer[0-7]],  String, Integer[0-7]]`
 
@@ -431,19 +431,19 @@ Standard parameter for the cron resource.
 
 Default value: `'*'`
 
-##### <a name="-easy_ipa--backup--hour"></a>`hour`
+##### <a name="-ipa--backup--hour"></a>`hour`
 
 Data type: `Variant[Array[String], Array[Integer[0-23]], String, Integer[0-23]]`
 
 Standard parameter for the cron resource.
 
-##### <a name="-easy_ipa--backup--minute"></a>`minute`
+##### <a name="-ipa--backup--minute"></a>`minute`
 
 Data type: `Variant[Array[String], Array[Integer[0-59]], String, Integer[0-59]]`
 
 Standard parameter for the cron resource
 
-##### <a name="-easy_ipa--backup--email"></a>`email`
+##### <a name="-ipa--backup--email"></a>`email`
 
 Data type: `String`
 
@@ -453,7 +453,7 @@ Default value: `fact('servermonitor')`
 
 ## Plans
 
-### <a name="easy_ipa--update_host_keys"></a>`easy_ipa::update_host_keys`
+### <a name="ipa--update_host_keys"></a>`ipa::update_host_keys`
 
 Useful when real keys and keys in IPA device account have gone
   out of sync, e.g. due to rebuilding the server from a snapshot.
@@ -467,39 +467,39 @@ Useful when real keys and keys in IPA device account have gone
 
 #### Parameters
 
-The following parameters are available in the `easy_ipa::update_host_keys` plan:
+The following parameters are available in the `ipa::update_host_keys` plan:
 
-* [`ipa_clients`](#-easy_ipa--update_host_keys--ipa_clients)
-* [`ipa_server`](#-easy_ipa--update_host_keys--ipa_server)
-* [`ipa_user`](#-easy_ipa--update_host_keys--ipa_user)
-* [`ipa_password`](#-easy_ipa--update_host_keys--ipa_password)
-* [`noop`](#-easy_ipa--update_host_keys--noop)
+* [`ipa_clients`](#-ipa--update_host_keys--ipa_clients)
+* [`ipa_server`](#-ipa--update_host_keys--ipa_server)
+* [`ipa_user`](#-ipa--update_host_keys--ipa_user)
+* [`ipa_password`](#-ipa--update_host_keys--ipa_password)
+* [`noop`](#-ipa--update_host_keys--noop)
 
-##### <a name="-easy_ipa--update_host_keys--ipa_clients"></a>`ipa_clients`
+##### <a name="-ipa--update_host_keys--ipa_clients"></a>`ipa_clients`
 
 Data type: `TargetSpec`
 
 One of more IPA clients whose host keys to puload
 
-##### <a name="-easy_ipa--update_host_keys--ipa_server"></a>`ipa_server`
+##### <a name="-ipa--update_host_keys--ipa_server"></a>`ipa_server`
 
 Data type: `TargetSpec`
 
 A host which has the "ipa" tools installed. Not necessarily an IPA server.
 
-##### <a name="-easy_ipa--update_host_keys--ipa_user"></a>`ipa_user`
+##### <a name="-ipa--update_host_keys--ipa_user"></a>`ipa_user`
 
 Data type: `String`
 
 An IPA user with permission to run "ipa host-mod".
 
-##### <a name="-easy_ipa--update_host_keys--ipa_password"></a>`ipa_password`
+##### <a name="-ipa--update_host_keys--ipa_password"></a>`ipa_password`
 
 Data type: `String`
 
 IPA user's password
 
-##### <a name="-easy_ipa--update_host_keys--noop"></a>`noop`
+##### <a name="-ipa--update_host_keys--noop"></a>`noop`
 
 Data type: `Boolean`
 

@@ -1,5 +1,5 @@
 {
-  "name": "puppetfinland-easy_ipa",
+  "name": "puppetfinland-ipa",
   "version": "3.1.1",
   "author": "Puppet-Finland team",
   "summary": "Manages IPA servers and clients.",
@@ -76,8 +76,6 @@
   ],
   "tags": [
     "ipa",
-    "easyipa",
-    "easy ipa",
     "freeipa",
     "free ipa"
   ]

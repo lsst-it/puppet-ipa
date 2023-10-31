@@ -1,4 +1,4 @@
 ---
-easy_ipa::server::package_name:
+ipa::server::package_name:
   - ipa-server
   - kstart

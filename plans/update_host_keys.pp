@@ -1,7 +1,7 @@
 #
 # @summary Update host keys for a domain-joined node in FreeIPA to match real host
 #   keys.
-# 
+#
 # Useful when real keys and keys in IPA device account have gone
 #   out of sync, e.g. due to rebuilding the server from a snapshot.
 #
@@ -23,7 +23,7 @@
 # @param noop
 #   If true then only imulate what would be done
 #
-plan easy_ipa::update_host_keys
+plan ipa::update_host_keys
 (
   TargetSpec $ipa_clients,
   TargetSpec $ipa_server,
@@ -56,7 +56,7 @@ plan easy_ipa::update_host_keys
     if $noop {
       out::message("No-op: would run \"${ipa_host_mod_cmd}\" on IPA server")
     } else {
-      # lint:ignore:manifest_whitespace_opening_bracket_before  # lint:ignore:140chars 
+      # lint:ignore:manifest_whitespace_opening_bracket_before  # lint:ignore:140chars
       $ipa_host_mod_resultset = run_command($ipa_host_mod_cmd, $ipa_server, '_catch_errors' => true) ['stdout','stderr'].each |$output| {
         # lint:endignore
         out::message($ipa_host_mod_resultset.first.value[$output])
