@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'easy_ipa', type: :class do
+describe 'ipa', type: :class do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
@@ -41,11 +41,11 @@ describe 'easy_ipa', type: :class do
         end
 
         context 'with defaults' do
-          it { is_expected.to contain_class('easy_ipa::server') }
-          it { is_expected.to contain_class('easy_ipa::server::master') }
+          it { is_expected.to contain_class('ipa::server') }
+          it { is_expected.to contain_class('ipa::server::master') }
 
-          it { is_expected.not_to contain_class('easy_ipa::server::replica') }
-          it { is_expected.not_to contain_class('easy_ipa::client') }
+          it { is_expected.not_to contain_class('ipa::server::replica') }
+          it { is_expected.not_to contain_class('ipa::client') }
 
           it { is_expected.to contain_package('ipa-server-dns') }
           it { is_expected.to contain_package('bind-dyndb-ldap') }
@@ -212,11 +212,11 @@ describe 'easy_ipa', type: :class do
         end
 
         context 'with defaults' do
-          it { is_expected.to contain_class('easy_ipa::server') }
-          it { is_expected.to contain_class('easy_ipa::server::replica') }
+          it { is_expected.to contain_class('ipa::server') }
+          it { is_expected.to contain_class('ipa::server::replica') }
 
-          it { is_expected.not_to contain_class('easy_ipa::server::master') }
-          it { is_expected.not_to contain_class('easy_ipa::client') }
+          it { is_expected.not_to contain_class('ipa::server::master') }
+          it { is_expected.not_to contain_class('ipa::client') }
 
           it { is_expected.to contain_package('ipa-server-dns') }
           it { is_expected.to contain_package('bind-dyndb-ldap') }
@@ -308,11 +308,11 @@ describe 'easy_ipa', type: :class do
         end
 
         context 'with defaults' do
-          it { is_expected.to contain_class('easy_ipa::client') }
+          it { is_expected.to contain_class('ipa::client') }
 
-          it { is_expected.not_to contain_class('easy_ipa::server') }
-          it { is_expected.not_to contain_class('easy_ipa::server::master') }
-          it { is_expected.not_to contain_class('easy_ipa::server::replica') }
+          it { is_expected.not_to contain_class('ipa::server') }
+          it { is_expected.not_to contain_class('ipa::server::master') }
+          it { is_expected.not_to contain_class('ipa::server::replica') }
 
           it { is_expected.to contain_package(client_package).that_comes_before('Exec[ipa-client-install]') }
           it { is_expected.to contain_package('kstart') }

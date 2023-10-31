@@ -1,5 +1,5 @@
 #
-# @summary Define easy_ipa::backup
+# @summary Define ipa::backup
 #
 # Backup FreeIPA from cron
 #
@@ -23,7 +23,7 @@
 # @param email
 #   Email to send cron notifications to. Defaults to $::servermonitor.
 #
-define easy_ipa::backup (
+define ipa::backup (
   Enum['full','data']                                                 $type,
   Variant[Array[String], Array[Integer[0-23]], String, Integer[0-23]] $hour,
   Variant[Array[String], Array[Integer[0-59]], String, Integer[0-59]] $minute,
@@ -38,7 +38,7 @@ define easy_ipa::backup (
   ensure_resource('file', $script, {
       'ensure'  => 'present',
       'name'    => "/usr/local/bin/${script}",
-      'content' => template("easy_ipa/${script}.erb"),
+      'content' => template("ipa/${script}.erb"),
       'owner'   => 'root',
       'group'   => 'root',
       'mode'    => '0755',

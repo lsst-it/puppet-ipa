@@ -102,7 +102,7 @@
 # TODO: Variable scope and passing.
 # TODO: configurable admin username.
 #
-class easy_ipa (
+class ipa (
   Stdlib::Fqdn $domain,
   Enum['client', 'master', 'replica'] $ipa_role,
   Optional[String[8]] $admin_password              = undef,
@@ -132,7 +132,7 @@ class easy_ipa (
   Optional[Stdlib::Fqdn] $realm                    = undef,
   Boolean $adjust_login_defs                       = false,
 ) {
-  if $easy_ipa::idmax and $easy_ipa::idmax < $easy_ipa::idstart {
+  if $ipa::idmax and $ipa::idmax < $ipa::idstart {
     fail('Parameter "idmax" must be an integer greater than parameter "idstart".')
   }
 
@@ -162,9 +162,9 @@ class easy_ipa (
     default => '--no-sshd',
   }
 
-  if $easy_ipa::adjust_login_defs {
-    $uid_max_value = $easy_ipa::idstart -1
-    $gid_max_value = $easy_ipa::idstart -1
+  if $ipa::adjust_login_defs {
+    $uid_max_value = $ipa::idstart -1
+    $gid_max_value = $ipa::idstart -1
 
     file_line {
       default:
@@ -182,9 +182,9 @@ class easy_ipa (
     }
   }
 
-  if $easy_ipa::ipa_role == 'master' or $easy_ipa::ipa_role == 'replica' {
-    contain 'easy_ipa::server'
-  } elsif $easy_ipa::ipa_role == 'client' {
-    contain 'easy_ipa::client'
+  if $ipa::ipa_role == 'master' or $ipa::ipa_role == 'replica' {
+    contain 'ipa::server'
+  } elsif $ipa::ipa_role == 'client' {
+    contain 'ipa::client'
   }
 }

@@ -5,7 +5,7 @@
 # not configure PAM even though it does install the required packages.
 #
 # @api private
-class easy_ipa::client::debian {
+class ipa::client::debian {
   assert_private()
 
   case fact('os.distro.codename') {

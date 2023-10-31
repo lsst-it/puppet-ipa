@@ -7,44 +7,44 @@
 # @param force_join
 #   Force the client to join the domain even if it is already joined.
 #
-class easy_ipa::client (
+class ipa::client (
   Array[String] $package_name = undef,
   Boolean $force_join = false,
 ) {
-  unless $easy_ipa::final_domain_join_password {
-    fail("When creating a ${easy_ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
+  unless $ipa::final_domain_join_password {
+    fail("When creating a ${ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
   }
-  unless $easy_ipa::ipa_master_fqdn {
-    fail("When creating a ${easy_ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
+  unless $ipa::ipa_master_fqdn {
+    fail("When creating a ${ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
   }
 
   ensure_packages($package_name)
 
-  if $easy_ipa::mkhomedir {
+  if $ipa::mkhomedir {
     $client_install_cmd_opts_mkhomedir = '--mkhomedir'
   } else {
     $client_install_cmd_opts_mkhomedir = ''
   }
 
-  if $easy_ipa::fixed_primary {
+  if $ipa::fixed_primary {
     $client_install_cmd_opts_fixed_primary = '--fixed-primary'
   } else {
     $client_install_cmd_opts_fixed_primary = ''
   }
 
-  if $easy_ipa::configure_ntp {
+  if $ipa::configure_ntp {
     $client_install_cmd_opts_no_ntp = ''
   } else {
     $client_install_cmd_opts_no_ntp = '--no-ntp'
   }
 
-  if $easy_ipa::enable_dns_updates {
+  if $ipa::enable_dns_updates {
     $client_install_cmd_opts_dns_updates = '--enable-dns-updates'
   } else {
     $client_install_cmd_opts_dns_updates = ''
   }
 
-  if $easy_ipa::enable_hostname {
+  if $ipa::enable_hostname {
     $client_install_cmd_opts_hostname = "--hostname=${fact('networking.fqdn')}"
   } else {
     $client_install_cmd_opts_hostname = ''
@@ -58,10 +58,10 @@ class easy_ipa::client (
 
   $client_install_cmd = "\
 /usr/sbin/ipa-client-install \
-  --server=${easy_ipa::ipa_master_fqdn} \
-  --realm=${easy_ipa::final_realm} \
-  --domain=${easy_ipa::domain} \
-  --principal='${easy_ipa::domain_join_principal}' \
+  --server=${ipa::ipa_master_fqdn} \
+  --realm=${ipa::final_realm} \
+  --domain=${ipa::domain} \
+  --principal='${ipa::domain_join_principal}' \
   --password=\"\${IPA_DOMAIN_JOIN_PASSWORD}\" \
   ${client_install_cmd_opts_dns_updates} \
   ${client_install_cmd_opts_hostname} \
@@ -69,22 +69,22 @@ class easy_ipa::client (
   ${client_install_cmd_opts_fixed_primary} \
   ${client_install_cmd_opts_no_ntp} \
   ${client_install_cmd_opts_force_join} \
-  ${easy_ipa::opt_no_ssh} \
-  ${easy_ipa::opt_no_sshd} \
+  ${ipa::opt_no_ssh} \
+  ${ipa::opt_no_sshd} \
   --unattended"
 
   exec { 'ipa-client-install':
-    environment => "IPA_DOMAIN_JOIN_PASSWORD=${easy_ipa::final_domain_join_password}",
+    environment => "IPA_DOMAIN_JOIN_PASSWORD=${ipa::final_domain_join_password}",
     command     => $client_install_cmd,
     timeout     => 0,
-    unless      => "cat /etc/ipa/default.conf | grep -i \"${easy_ipa::domain}\"",
+    unless      => "cat /etc/ipa/default.conf | grep -i \"${ipa::domain}\"",
     creates     => '/etc/ipa/default.conf',
     logoutput   => on_failure,
     provider    => shell,
     require     => Package[$package_name],
   }
 
-  if fact('os.family') == 'Debian' and $easy_ipa::mkhomedir {
-    contain easy_ipa::client::debian
+  if fact('os.family') == 'Debian' and $ipa::mkhomedir {
+    contain ipa::client::debian
   }
 }
