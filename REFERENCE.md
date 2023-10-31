@@ -18,12 +18,12 @@
 #### Private Classes
 
 * `easy_ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
+* `easy_ipa::server::flushcache`: Manage cache flushing
 * `easy_ipa::server::redhat`
 
 ### Defined types
 
 * [`easy_ipa::backup`](#easy_ipa--backup): Define easy_ipa::backup
-* [`easy_ipa::helpers::flushcache`](#easy_ipa--helpers--flushcache): Manage cache flushing
 
 ### Plans
 
@@ -450,10 +450,6 @@ Data type: `String`
 Email to send cron notifications to. Defaults to $::servermonitor.
 
 Default value: `fact('servermonitor')`
-
-### <a name="easy_ipa--helpers--flushcache"></a>`easy_ipa::helpers::flushcache`
-
-Manage cache flushing
 
 ## Plans
 

@@ -121,10 +121,10 @@ class easy_ipa::server (
     -> Service['ipa']
   }
 
+  include easy_ipa::server::flushcache
+
   service { 'ipa':
     ensure => running,
     enable => true,
   }
-
-  easy_ipa::helpers::flushcache { "server_${easy_ipa::ipa_server_fqdn}": }
 }

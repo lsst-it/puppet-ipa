@@ -30,7 +30,7 @@ class easy_ipa::server::replica {
     unless      => '/usr/sbin/ipactl status >/dev/null 2>&1',
     creates     => '/etc/ipa/default.conf',
     logoutput   => on_failure,
-    notify      => Easy_ipa::Helpers::Flushcache["server_${easy_ipa::ipa_server_fqdn}"],
+    notify      => Class[easy_ipa::server::flushcache],
   }
   -> cron { 'k5start_root':
     command => '/usr/bin/k5start -f /etc/krb5.keytab -U -o root -k /tmp/krb5cc_0 > /dev/null 2>&1',
