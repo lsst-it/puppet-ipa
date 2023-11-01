@@ -18,7 +18,7 @@ class ipa::client (
     fail("When creating a ${ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
   }
 
-  ensure_packages($package_name)
+  stdlib::ensure_packages($package_name)
 
   if $ipa::mkhomedir {
     $client_install_cmd_opts_mkhomedir = '--mkhomedir'
