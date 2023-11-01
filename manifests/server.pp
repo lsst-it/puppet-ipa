@@ -20,7 +20,7 @@ class ipa::server (
     require ipa::server::redhat
   }
 
-  ensure_packages($package_name)
+  stdlib::ensure_packages($package_name)
 
   $dns_packages = [
     'ipa-server-dns',
@@ -28,7 +28,7 @@ class ipa::server (
   ]
 
   if $ipa::final_configure_dns_server {
-    ensure_packages($dns_packages)
+    stdlib::ensure_packages($dns_packages)
   }
 
   $server_install_cmd_opts_idstart = "--idstart=${ipa::idstart}"
