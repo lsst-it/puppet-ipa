@@ -35,7 +35,7 @@ define ipa::backup (
   ensure_resource('file', $script, {
       'ensure'  => 'present',
       'name'    => "/usr/local/bin/${script}",
-      'content' => template("ipa/${script}.erb"),
+      'content' => file("${module_name}/${script}"),
       'owner'   => 'root',
       'group'   => 'root',
       'mode'    => '0755',
