@@ -392,7 +392,6 @@ The following parameters are available in the `ipa::backup` defined type:
 * [`weekday`](#-ipa--backup--weekday)
 * [`hour`](#-ipa--backup--hour)
 * [`minute`](#-ipa--backup--minute)
-* [`email`](#-ipa--backup--email)
 
 ##### <a name="-ipa--backup--title"></a>`title`
 
@@ -442,14 +441,6 @@ Standard parameter for the cron resource.
 Data type: `Variant[Array[String], Array[Integer[0-59]], String, Integer[0-59]]`
 
 Standard parameter for the cron resource
-
-##### <a name="-ipa--backup--email"></a>`email`
-
-Data type: `String`
-
-Email to send cron notifications to. Defaults to $::servermonitor.
-
-Default value: `fact('servermonitor')`
 
 ## Plans
 

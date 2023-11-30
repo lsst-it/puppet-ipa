@@ -20,8 +20,6 @@
 #   Standard parameter for the cron resource.
 # @param minute
 #   Standard parameter for the cron resource
-# @param email
-#   Email to send cron notifications to. Defaults to $::servermonitor.
 #
 define ipa::backup (
   Enum['full','data']                                                 $type,
@@ -29,7 +27,6 @@ define ipa::backup (
   Variant[Array[String], Array[Integer[0-59]], String, Integer[0-59]] $minute,
   Variant[Array[String], Array[Integer[0-7]],  String, Integer[0-7]]  $weekday = '*',
   Variant[Array[String], Array[Integer[1-31]], String, Integer[1-31]] $monthday = '*',
-  String                                                              $email = fact('servermonitor'),
   Boolean                                                             $timestamp = true,
 ) {
   $script = 'ipa-backup-wrapper.sh'
@@ -51,7 +48,7 @@ define ipa::backup (
     weekday     => $weekday,
     hour        => $hour,
     minute      => $minute,
-    environment => ['PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin', "MAILTO=${email}"],
+    environment => ['PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'],
     require     => File[$script],
   }
 }
