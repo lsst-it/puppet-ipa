@@ -4,7 +4,7 @@
 class ipa::server::replica {
   $replica_install_cmd = "\
 /usr/sbin/ipa-replica-install \
-  --principal=${ipa::domain_join_principal} \
+  --principal=${ipa::domain_join_principal.unwrap} \
   --admin-password=\"\${IPA_ADMIN_PASSWORD}\" \
   ${ipa::server::server_install_cmd_opts_hostname} \
   --realm=${ipa::final_realm} \
@@ -24,7 +24,7 @@ class ipa::server::replica {
   --unattended"
 
   exec { 'ipa-replica-install':
-    environment => "IPA_ADMIN_PASSWORD=${ipa::admin_password}",
+    environment => "IPA_ADMIN_PASSWORD=${ipa::admin_password.unwrap}",
     command     => $replica_install_cmd,
     timeout     => 0,
     unless      => '/usr/sbin/ipactl status >/dev/null 2>&1',

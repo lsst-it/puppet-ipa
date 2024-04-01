@@ -25,8 +25,8 @@ class ipa::server::master {
 
   exec { 'ipa-server-install':
     environment => [
-      "IPA_ADMIN_PASSWORD=${ipa::admin_password}",
-      "IPA_DS_PASSWORD=${ipa::directory_services_password}",
+      "IPA_ADMIN_PASSWORD=${ipa::admin_password.unwrap}",
+      "IPA_DS_PASSWORD=${ipa::directory_services_password.unwrap}",
     ],
     command     => $server_install_cmd,
     timeout     => 0,

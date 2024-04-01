@@ -61,7 +61,7 @@ class ipa::client (
   --server=${ipa::ipa_master_fqdn} \
   --realm=${ipa::final_realm} \
   --domain=${ipa::domain} \
-  --principal='${ipa::domain_join_principal}' \
+  --principal='${ipa::domain_join_principal.unwrap}' \
   --password=\"\${IPA_DOMAIN_JOIN_PASSWORD}\" \
   ${client_install_cmd_opts_dns_updates} \
   ${client_install_cmd_opts_hostname} \
@@ -74,7 +74,7 @@ class ipa::client (
   --unattended"
 
   exec { 'ipa-client-install':
-    environment => "IPA_DOMAIN_JOIN_PASSWORD=${ipa::final_domain_join_password}",
+    environment => "IPA_DOMAIN_JOIN_PASSWORD=${ipa::final_domain_join_password.unwrap}",
     command     => $client_install_cmd,
     timeout     => 0,
     unless      => "cat /etc/ipa/default.conf | grep -i \"${ipa::domain}\"",
