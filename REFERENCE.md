@@ -86,7 +86,7 @@ Data type: `Enum['client', 'master', 'replica']`
 
 ##### <a name="-ipa--admin_password"></a>`admin_password`
 
-Data type: `Optional[String[8]]`
+Data type: `Optional[Variant[Sensitive[String[8]],String[8]]]`
 
 (string) Password which will be assigned to the IPA account named 'admin'.
 
@@ -94,7 +94,7 @@ Default value: `undef`
 
 ##### <a name="-ipa--directory_services_password"></a>`directory_services_password`
 
-Data type: `Optional[String[8]]`
+Data type: `Optional[Variant[Sensitive[String[8]],String[8]]]`
 
 (string) Password which will be passed into the ipa setup's parameter named "--ds-password".
 
@@ -174,7 +174,7 @@ Default value: `[]`
 
 ##### <a name="-ipa--domain_join_principal"></a>`domain_join_principal`
 
-Data type: `String[1]`
+Data type: `Variant[Sensitive[String[1]],String[1]]`
 
 (string) The principal (usually username) used to join a client or replica to the IPA domain.
 
@@ -182,7 +182,7 @@ Default value: `'admin'`
 
 ##### <a name="-ipa--domain_join_password"></a>`domain_join_password`
 
-Data type: `Optional[String[1]]`
+Data type: `Optional[Variant[Sensitive[String[1]],String[1]]]`
 
 (string) The password for the domain_join_principal.
 

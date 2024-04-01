@@ -35,8 +35,8 @@ describe 'ipa', type: :class do
           {
             ipa_role:                    'master',
             domain:                      'rspec.example.lan',
-            admin_password:              'rspec-admin-password',
-            directory_services_password: 'rspedc-ds-password',
+            admin_password:              sensitive('rspec-admin-password'),
+            directory_services_password: sensitive('rspedc-ds-password'),
           }
         end
 
@@ -165,7 +165,7 @@ describe 'ipa', type: :class do
             super().merge(admin_password: nil)
           end
 
-          it { is_expected.to raise_error(Puppet::Error, Regexp.new(Regexp.quote('expects a value of type Undef or String[8]'))) }
+          it { is_expected.to raise_error(Puppet::Error, Regexp.new(Regexp.quote('expects a value of type'))) }
         end
 
         context 'without directory_services_password' do
@@ -173,7 +173,7 @@ describe 'ipa', type: :class do
             super().merge(directory_services_password: nil)
           end
 
-          it { is_expected.to raise_error(Puppet::Error, Regexp.new(Regexp.quote('expects a value of type Undef or String[8]'))) }
+          it { is_expected.to raise_error(Puppet::Error, Regexp.new(Regexp.quote('expects a value of type'))) }
         end
 
         context 'with bad ip_address' do
