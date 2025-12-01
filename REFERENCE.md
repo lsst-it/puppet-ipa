@@ -10,13 +10,13 @@
 
 * [`ipa`](#ipa): Manages IPA masters, replicas and clients.
 * [`ipa::client`](#ipa--client): Manage ipa client
-* [`ipa::server`](#ipa--server): Manage IPA server install
 * [`ipa::server::master`](#ipa--server--master): Manage primary server
 * [`ipa::server::replica`](#ipa--server--replica): Manage replica install
 
 #### Private Classes
 
 * `ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
+* `ipa::server`: Manage IPA server install
 * `ipa::server::flushcache`: Manage cache flushing
 * `ipa::server::redhat`
 
@@ -316,24 +316,6 @@ Data type: `Boolean`
 Force the client to join the domain even if it is already joined.
 
 Default value: `false`
-
-### <a name="ipa--server"></a>`ipa::server`
-
-Manage IPA server install
-
-#### Parameters
-
-The following parameters are available in the `ipa::server` class:
-
-* [`package_name`](#-ipa--server--package_name)
-
-##### <a name="-ipa--server--package_name"></a>`package_name`
-
-Data type: `Array[String]`
-
-The name of the package(s) to install.
-
-Default value: `undef`
 
 ### <a name="ipa--server--master"></a>`ipa::server::master`
 

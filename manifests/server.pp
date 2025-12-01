@@ -4,9 +4,12 @@
 # @param package_name
 #  The name of the package(s) to install.
 #
+# @api private
 class ipa::server (
   Array[String] $package_name = undef,
 ) {
+  assert_private()
+
   if $ipa::ipa_role != 'master' { # if replica or client
     unless $ipa::ipa_master_fqdn {
       fail("When creating a ${ipa::ipa_role} the parameter named ipa_master_fqdn cannot be empty.")
