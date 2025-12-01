@@ -7,10 +7,13 @@
 # @param force_join
 #   Force the client to join the domain even if it is already joined.
 #
+# @api private
 class ipa::client (
   Array[String] $package_name = undef,
   Boolean $force_join = false,
 ) {
+  assert_private()
+
   unless $ipa::domain_join_password {
     fail("When creating a ${ipa::ipa_role} the parameter named domain_join_password cannot be empty.")
   }
