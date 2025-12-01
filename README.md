@@ -47,26 +47,6 @@ class { 'ipa::packetfilter::server':
 }
 ```
 
-Add a backup job to cron:
-
-```puppet
-    ipa::backup { 'full':
-      type      => 'full',
-      timestamp => false,
-      monthday  => 1,
-      weekday   => undef,
-      hour      => 4,
-      minute    => 15,
-      email     => 'admin@domain.com',
-    }
-```
-
-Backup type can be 'full' or 'data'. Timestamp is either true (default) or
-false. A wrapper script is used as ipa-backup always adds a timestamp to the
-backup directory, which makes no sense if an external system (e.g. Bacula) is
-handling backup versioning anyways.
-
-
 Adding a client:
 
 ```puppet
