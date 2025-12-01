@@ -23,4 +23,4 @@ spec/spec_helper_acceptance.rb:
 
 .github/workflows/ci.yml:
   with:
-    hosts: master,replica,client
+    beaker_hosts: master,replica,client

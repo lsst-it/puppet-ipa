@@ -13,7 +13,7 @@ concurrency:
 jobs:
   puppet:
     name: Puppet
-    uses: jhoblitt/gha-puppet/.github/workflows/beaker.yml@feature/metadata2gha-multihost
+    uses: voxpupuli/gha-puppet/.github/workflows/beaker.yml@v4
     with:
-      hosts: master,replica,client
+      beaker_hosts: master,replica,client
       pidfile_workaround: 'false'
