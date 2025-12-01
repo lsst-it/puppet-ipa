@@ -38,15 +38,6 @@ class { 'ipa':
 }
 ```
 
-Add iptables/ip6tables allow rules:
-
-```puppet
-class { 'ipa::packetfilter::server':
-    allow_address_ipv4 => '10.0.0.0/8',
-    allow_address_ipv6 => '::1',
-}
-```
-
 Adding a client:
 
 ```puppet
