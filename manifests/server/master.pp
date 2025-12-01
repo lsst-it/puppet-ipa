@@ -1,7 +1,10 @@
 #
 # @summary Manage primary server
 #
+# @api private
 class ipa::server::master {
+  assert_private()
+
   $server_install_cmd = "\
 /usr/sbin/ipa-server-install \
   ${ipa::server::server_install_cmd_opts_hostname} \
