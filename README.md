@@ -1,10 +1,12 @@
-# ipa Puppet module
-[![Build Status](https://travis-ci.org/Puppet-Finland/puppet-ipa.svg?branch=master)](https://travis-ci.org/Puppet-Finland/puppet-ipa)
+# ipa
 
 ## Overview
 
-This module will install and configure IPA servers, replicas, and clients. This module was forked from huit-ipa,
-and refactored with a focus on simplicity and ease of use.
+This module manages [FreeIPA](https://www.freeipa.org/) servers, replicas, and clients.
+
+This module was forked from [Puppet-Finland/puppet-ipa](https://github.com/Puppet-Finland/puppet-ipa),
+which was forked from [jpuskar/puppet-ipa](https://github.com/jpuskar/puppet-ipa),
+which was forked from [huit/puppet-ipa](https://github.com/huit/puppet-ipa).
 
 ## Usage
 
@@ -12,14 +14,13 @@ and refactored with a focus on simplicity and ease of use.
 
 ```puppet
 class { 'ipa':
-    ipa_role                    => 'master',
-    domain                      => 'vagrant.example.lan',
-    ipa_server_fqdn             => 'ipa-server-1.vagrant.example.lan',
-    admin_password              => 'vagrant123',
-    directory_services_password => 'vagrant123',
-    ip_address                  => '192.168.56.35',
-    enable_ip_address           => true,
-    enable_hostname             => true,
+  ipa_role                    => 'master',
+  domain                      => 'example.com',
+  admin_password              => 'rspecrspec123',
+  directory_services_password => 'rspecrspec123',
+  idstart                     => 70000,
+  configure_dns_server        => false,
+  configure_ntp               => false,
 }
 ```
 
@@ -27,14 +28,13 @@ Adding a replica:
 
 ```puppet
 class { 'ipa':
-    ipa_role             => 'replica',
-    domain               => 'vagrant.example.lan',
-    ipa_server_fqdn      => 'ipa-server-2.vagrant.example.lan',
-    domain_join_password => 'vagrant123',
-    ip_address           => '192.168.56.36',
-    enable_ip_address    => true,
-    enable_hostname      => true,
-    ipa_master_fqdn      => 'ipa-server-1.vagrant.example.lan',
+  ipa_role             => 'replica',
+  domain               => 'example.com',
+  ipa_master_fqdn      => 'master-puppet8.example.com',
+  admin_password       => 'rspecrspec123',
+  configure_dns_server => false,
+  configure_ntp        => false,
+  configure_replica_ca => true,
 }
 ```
 
@@ -42,9 +42,11 @@ Adding a client:
 
 ```puppet
 class { 'ipa':
-ipa_role             => 'client',
-domain               => 'vagrant.example.lan',
-domain_join_password => 'vagrant123',
-ipa_master_fqdn      => 'ipa-server-1.vagrant.example.lan',
+  ipa_role              => 'client',
+  domain                => 'example.com',
+  domain_join_principal => 'admin',
+  domain_join_password  => 'rspecrspec123',
+  ipa_master_fqdn       => 'master-puppet8.example.com',
+  configure_ntp         => false,
 }
 ```
