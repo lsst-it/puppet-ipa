@@ -222,7 +222,7 @@ Default value: `(fqdn_rand('10737') + 10000`
 
 ##### <a name="-ipa--idmax"></a>`idmax`
 
-Data type: `Variant[Integer,Undef]`
+Data type: `Optional[Variant[Integer,Undef]]`
 
 (integer) From the IPA man pages: "The max value for the IDs range (default: idstart+199999)".
 

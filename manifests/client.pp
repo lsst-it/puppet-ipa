@@ -9,7 +9,7 @@
 #
 # @api private
 class ipa::client (
-  Array[String] $package_name = undef,
+  Optional[Array[String]] $package_name = undef,
   Boolean $force_join = false,
 ) {
   assert_private()

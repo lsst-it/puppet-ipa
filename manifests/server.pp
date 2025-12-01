@@ -6,7 +6,7 @@
 #
 # @api private
 class ipa::server (
-  Array[String] $package_name = undef,
+  Optional[Array[String]] $package_name = undef,
 ) {
   assert_private()
 
