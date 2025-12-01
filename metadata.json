@@ -1,12 +1,12 @@
 {
-  "name": "puppetfinland-ipa",
+  "name": "lsst-ipa",
   "version": "3.1.1",
-  "author": "Puppet-Finland team",
-  "summary": "Manages IPA servers and clients.",
-  "license": "Apache-2.0",
-  "source": "https://github.com/Puppet-Finland/puppet-ipa",
-  "project_page": "https://github.com/Puppet-Finland/puppet-ipa",
-  "issues_url": "https://github.com/Puppet-Finland/puppet-ipa",
+  "author": "AURA/LSST/Rubin Observatory",
+  "summary": "Manages FreeIPA servers, replicas, and clients",
+  "license": "GPL-3.0",
+  "source": "https://github.com/lsst-it/puppet-ipa",
+  "project_page": "https://github.com/lsst-it/puppet-ipa",
+  "issues_url": "https://github.com/lsst-it/puppet-ipa",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
