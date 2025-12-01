@@ -10,7 +10,6 @@
 
 * [`ipa`](#ipa): Manages IPA masters, replicas and clients.
 * [`ipa::client`](#ipa--client): Manage ipa client
-* [`ipa::packetfilter::server`](#ipa--packetfilter--server): Install packet filtering rules for FreeIPA.
 * [`ipa::server`](#ipa--server): Manage IPA server install
 * [`ipa::server::master`](#ipa--server--master): Manage primary server
 * [`ipa::server::replica`](#ipa--server--replica): Manage replica install
@@ -20,10 +19,6 @@
 * `ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
 * `ipa::server::flushcache`: Manage cache flushing
 * `ipa::server::redhat`
-
-### Defined types
-
-* [`ipa::backup`](#ipa--backup): Define ipa::backup
 
 ### Plans
 
@@ -322,33 +317,6 @@ Force the client to join the domain even if it is already joined.
 
 Default value: `false`
 
-### <a name="ipa--packetfilter--server"></a>`ipa::packetfilter::server`
-
-Install packet filtering rules for FreeIPA.
-
-#### Parameters
-
-The following parameters are available in the `ipa::packetfilter::server` class:
-
-* [`allow_address_ipv4`](#-ipa--packetfilter--server--allow_address_ipv4)
-* [`allow_address_ipv6`](#-ipa--packetfilter--server--allow_address_ipv6)
-
-##### <a name="-ipa--packetfilter--server--allow_address_ipv4"></a>`allow_address_ipv4`
-
-Data type: `Variant[Stdlib::IP::Address::V4,Array[Stdlib::IP::Address::V4]]`
-
-IPv4 address to allow access from.
-
-Default value: `'127.0.0.1'`
-
-##### <a name="-ipa--packetfilter--server--allow_address_ipv6"></a>`allow_address_ipv6`
-
-Data type: `Variant[Stdlib::IP::Address::V6,Array[Stdlib::IP::Address::V6]]`
-
-IPv6 address to allow access from.
-
-Default value: `'::1'`
-
 ### <a name="ipa--server"></a>`ipa::server`
 
 Manage IPA server install
@@ -374,73 +342,6 @@ Manage primary server
 ### <a name="ipa--server--replica"></a>`ipa::server::replica`
 
 Manage replica install
-
-## Defined types
-
-### <a name="ipa--backup"></a>`ipa::backup`
-
-Backup FreeIPA from cron
-
-#### Parameters
-
-The following parameters are available in the `ipa::backup` defined type:
-
-* [`title`](#-ipa--backup--title)
-* [`type`](#-ipa--backup--type)
-* [`timestamp`](#-ipa--backup--timestamp)
-* [`monthday`](#-ipa--backup--monthday)
-* [`weekday`](#-ipa--backup--weekday)
-* [`hour`](#-ipa--backup--hour)
-* [`minute`](#-ipa--backup--minute)
-
-##### <a name="-ipa--backup--title"></a>`title`
-
-The resource title is used as part of the the name for the cronjob.
-
-##### <a name="-ipa--backup--type"></a>`type`
-
-Data type: `Enum['full','data']`
-
-Backup type. Either 'full' (offline) or 'data' (online).
-
-##### <a name="-ipa--backup--timestamp"></a>`timestamp`
-
-Data type: `Boolean`
-
-Keep the default timestamp in the backup directory. Valid values are true
-(default) and false. Set this to false if you have and external system (e.g.
-bacula) that fetches the backups periodically and handles versioning on its
-own.
-
-Default value: `true`
-
-##### <a name="-ipa--backup--monthday"></a>`monthday`
-
-Data type: `Variant[Array[String], Array[Integer[1-31]], String, Integer[1-31]]`
-
-Standard parameter for the cron resource.
-
-Default value: `'*'`
-
-##### <a name="-ipa--backup--weekday"></a>`weekday`
-
-Data type: `Variant[Array[String], Array[Integer[0-7]],  String, Integer[0-7]]`
-
-Standard parameter for the cron resource.
-
-Default value: `'*'`
-
-##### <a name="-ipa--backup--hour"></a>`hour`
-
-Data type: `Variant[Array[String], Array[Integer[0-23]], String, Integer[0-23]]`
-
-Standard parameter for the cron resource.
-
-##### <a name="-ipa--backup--minute"></a>`minute`
-
-Data type: `Variant[Array[String], Array[Integer[0-59]], String, Integer[0-59]]`
-
-Standard parameter for the cron resource
 
 ## Plans
 
