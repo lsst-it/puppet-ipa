@@ -1,12 +1,12 @@
 {
-  "name": "puppetfinland-easy_ipa",
-  "version": "3.1.1",
-  "author": "Puppet-Finland team",
-  "summary": "Manages IPA servers and clients.",
-  "license": "Apache-2.0",
-  "source": "https://github.com/Puppet-Finland/puppet-ipa",
-  "project_page": "https://github.com/Puppet-Finland/puppet-ipa",
-  "issues_url": "https://github.com/Puppet-Finland/puppet-ipa",
+  "name": "lsst-ipa",
+  "version": "4.0.0",
+  "author": "AURA/LSST/Rubin Observatory",
+  "summary": "Manages FreeIPA servers, replicas, and clients",
+  "license": "GPL-3.0",
+  "source": "https://github.com/lsst-it/puppet-ipa",
+  "project_page": "https://github.com/lsst-it/puppet-ipa",
+  "issues_url": "https://github.com/lsst-it/puppet-ipa",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
@@ -14,7 +14,7 @@
     },
     {
       "name": "puppetlabs-cron_core",
-      "version_requirement": ">=1.0.0 < 2.0.0"
+      "version_requirement": ">=1.0.0 < 3.0.0"
     },
     {
       "name": "puppetlabs-k5login_core",
@@ -23,16 +23,15 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "CentOS",
+      "operatingsystem": "AlmaLinux",
       "operatingsystemrelease": [
-        "7",
-        "8"
+        "8",
+        "9"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -47,7 +46,6 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "10",
         "11",
         "12"
       ]
@@ -55,8 +53,6 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "18.04",
-        "20.04",
         "22.04",
         "24.04"
       ]
@@ -65,17 +61,12 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 7.0.0 < 9.0.0"
+      "version_requirement": ">= 8.0.0 < 9.0.0"
     }
   ],
   "tags": [
     "ipa",
-    "easyipa",
-    "easy ipa",
     "freeipa",
     "free ipa"
-  ],
-  "pdk-version": "3.0.0",
-  "template-url": "pdk-default#3.0.0",
-  "template-ref": "tags/3.0.0-0-g056e50d"
+  ]
 }

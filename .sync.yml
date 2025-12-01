@@ -4,6 +4,10 @@
     - parameter_documentation
     - parameter_types
 
+spec/spec_helper_acceptance.rb:
+  unmanaged: false
+  configure_beaker: ~
+
 .github/CONTRIBUTING.md:
   delete: true
 .github/ISSUE_TEMPLATE.md:
@@ -12,8 +16,11 @@
   delete: true
 .github/SECURITY.md:
   delete: true
+.github/workflows/shellcheck.yaml:
+  delete: true
+.github/workflows/markdownlint.yaml:
+  delete: true
 
-Gemfile:
-  required:
-    ':development':
-      - gem: github_changelog_generator
+.github/workflows/ci.yml:
+  with:
+    beaker_hosts: master,replica,client
