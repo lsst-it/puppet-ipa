@@ -9,21 +9,16 @@
 #### Public Classes
 
 * [`ipa`](#ipa): Manages IPA masters, replicas and clients.
-* [`ipa::client`](#ipa--client): Manage ipa client
-* [`ipa::server::master`](#ipa--server--master): Manage primary server
-* [`ipa::server::replica`](#ipa--server--replica): Manage replica install
 
 #### Private Classes
 
+* `ipa::client`: Manage ipa client
 * `ipa::client::debian`: Ensure that home directories get created on Debian and Ubuntu clients.
 * `ipa::server`: Manage IPA server install
 * `ipa::server::flushcache`: Manage cache flushing
+* `ipa::server::master`: Manage primary server
 * `ipa::server::redhat`
-
-### Plans
-
-* [`ipa::update_host_keys`](#ipa--update_host_keys): Update host keys for a domain-joined node in FreeIPA to match real host
-keys.
+* `ipa::server::replica`: Manage replica install
 
 ## Classes
 
@@ -289,95 +284,4 @@ Data type: `Boolean`
 (boolean) Adjust UID_MAX and GID_MAX in login.defs. Without this newer server installers fail. Default false.
 
 Default value: `false`
-
-### <a name="ipa--client"></a>`ipa::client`
-
-Manage ipa client
-
-#### Parameters
-
-The following parameters are available in the `ipa::client` class:
-
-* [`package_name`](#-ipa--client--package_name)
-* [`force_join`](#-ipa--client--force_join)
-
-##### <a name="-ipa--client--package_name"></a>`package_name`
-
-Data type: `Array[String]`
-
-The name of the package(s) to install.
-
-Default value: `undef`
-
-##### <a name="-ipa--client--force_join"></a>`force_join`
-
-Data type: `Boolean`
-
-Force the client to join the domain even if it is already joined.
-
-Default value: `false`
-
-### <a name="ipa--server--master"></a>`ipa::server::master`
-
-Manage primary server
-
-### <a name="ipa--server--replica"></a>`ipa::server::replica`
-
-Manage replica install
-
-## Plans
-
-### <a name="ipa--update_host_keys"></a>`ipa::update_host_keys`
-
-Useful when real keys and keys in IPA device account have gone
-  out of sync, e.g. due to rebuilding the server from a snapshot.
-
-  This gets a kerberos ticket from the IPA server first, then gathers
-  the SSH keys from IPA clients from their SSH facts, then runs appropriate
-  "ipa host-mod" commands for each IPA client on the IPA server.
-
-  Note that it is assumed that the IPA client host name is equal to the $::fqdn
-  fact.
-
-#### Parameters
-
-The following parameters are available in the `ipa::update_host_keys` plan:
-
-* [`ipa_clients`](#-ipa--update_host_keys--ipa_clients)
-* [`ipa_server`](#-ipa--update_host_keys--ipa_server)
-* [`ipa_user`](#-ipa--update_host_keys--ipa_user)
-* [`ipa_password`](#-ipa--update_host_keys--ipa_password)
-* [`noop`](#-ipa--update_host_keys--noop)
-
-##### <a name="-ipa--update_host_keys--ipa_clients"></a>`ipa_clients`
-
-Data type: `TargetSpec`
-
-One of more IPA clients whose host keys to puload
-
-##### <a name="-ipa--update_host_keys--ipa_server"></a>`ipa_server`
-
-Data type: `TargetSpec`
-
-A host which has the "ipa" tools installed. Not necessarily an IPA server.
-
-##### <a name="-ipa--update_host_keys--ipa_user"></a>`ipa_user`
-
-Data type: `String`
-
-An IPA user with permission to run "ipa host-mod".
-
-##### <a name="-ipa--update_host_keys--ipa_password"></a>`ipa_password`
-
-Data type: `String`
-
-IPA user's password
-
-##### <a name="-ipa--update_host_keys--noop"></a>`noop`
-
-Data type: `Boolean`
-
-If true then only imulate what would be done
-
-Default value: `true`
 

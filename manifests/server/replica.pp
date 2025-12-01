@@ -1,7 +1,10 @@
 #
 # @summary Manage replica install
 #
+# @api private
 class ipa::server::replica {
+  assert_private()
+
   $replica_install_cmd = "\
 /usr/sbin/ipa-replica-install \
   --principal=${ipa::domain_join_principal.unwrap} \
