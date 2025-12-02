@@ -1,6 +1,6 @@
 {
   "name": "lsst-ipa",
-  "version": "4.0.0",
+  "version": "4.0.1-rc0",
   "author": "AURA/LSST/Rubin Observatory",
   "summary": "Manages FreeIPA servers, replicas, and clients",
   "license": "GPL-3.0",
