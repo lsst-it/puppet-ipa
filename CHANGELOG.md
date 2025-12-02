@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/lsst-it/puppet-ipa/tree/v4.0.0) (2025-12-01)
+
+[Full Changelog](https://github.com/lsst-it/puppet-ipa/compare/lsst-2.3.0...v4.0.0)
+
 ## [lsst-2.3.0](https://github.com/lsst-it/puppet-ipa/tree/lsst-2.3.0) (2022-07-07)
 
 [Full Changelog](https://github.com/lsst-it/puppet-ipa/compare/v2.2.0...lsst-2.3.0)
